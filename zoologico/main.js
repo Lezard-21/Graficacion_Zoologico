@@ -5,10 +5,12 @@ import * as THREE from 'three';
 import {OrbitControls} from 'three/examples/jsm/controls/OrbitControls'
 
 import { MapControls } from 'three/addons/controls/MapControls.js';
+import * as TWEEN from '@tweenjs/tween.js'
 
 
 //import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
+import { InteractionManager } from "three.interactive";
 
 const scene = new THREE.Scene();
 //scene.fog = new THREE.FogExp2( 0xcccccc, 0.02 );
@@ -70,11 +72,36 @@ const loader = new GLTFLoader(LoadingManager);
 let mixer;
 const clock = new THREE.Clock()
 
+const interactionManager = new InteractionManager(
+  render,
+  camera,
+  render.domElement
+);
 
+let model
 loader.load( 'scene.glb', function ( gltf ) {
 
-    const model = gltf.scene;
+    model = gltf.scene;
 	scene.add( model);
+    // model.userData.id = 'leon';
+
+     // Añade el evento de clic al modelo
+//   model.addEventListener('click', (event) => {
+//     event.stopPropagation();
+//     const cube = event.target;
+//     const coords = { x: camera.position.x, y: camera.position.y };
+//     console.log('evento')
+    
+//     // Crea una instancia de Tween para animar la posición de la cámara
+//     new TWEEN.Tween(coords)
+//       .to({ x: cube.position.x, y: cube.position.y })
+//       .onUpdate(() => {
+//         camera.position.set(coords.x, coords.y, camera.position.z);
+//       })
+//       .start();
+//   });
+
+
     model.position.set(10,0,10)
     mixer = new THREE.AnimationMixer(model);
     const clips = gltf.animations;
@@ -112,7 +139,7 @@ const controls = new MapControls(camera, render.domElement)
 const background = new THREE.TextureLoader().load('butter dog.jpg');
 scene.background = background;
 
-function animate() {
+function animate(time) {
     requestAnimationFrame( animate);
     //torus.rotation.x += 0.01;
     //torus.rotation.y += 0.005;
@@ -120,6 +147,8 @@ function animate() {
     //torus.position.y = 0.1;
     //if (mixer)
     mixer.update(clock.getDelta()); 
+    interactionManager.update();
+    TWEEN.update(time);
 
        // ring.position.x += .05;
     controls.update();
@@ -131,25 +160,32 @@ const mousePosition =  new THREE.Vector2()
 
  const rayCaster = new THREE.Raycaster()
 
-window.addEventListener('dblclick',(e)=>{
-    mousePosition.x = (e.clientX / window.innerWidth) * 2 - 1;
-    mousePosition.y = - (e.clientY / window.innerHeight) * 2 - 1;
+render.domElement.addEventListener('dblclick',(e)=>{
+  //  mousePosition.x = (e.clientX / window.innerWidth) * 2 - 1;
+//    mousePosition.y = - (e.clientY / window.innerHeight) * 2 - 1;
+   mousePosition.x = ((e.clientX - render.domElement.getBoundingClientRect().left) / render.domElement.clientWidth) * 2 - 1;
+mousePosition.y = -((e.clientY - render.domElement.getBoundingClientRect().top) / render.domElement.clientHeight) * 2 + 1;
+ 
     rayCaster.setFromCamera(mousePosition, camera)
-   const intersects = rayCaster.intersectObjects(scene.children)
+   const intersects = rayCaster.intersectObjects(model.children,true)
+    // if (intersects.length > 0) {
+    //     console.log("Model clicked.");
+    // }
    for (let i = 0; i < intersects.length; i++) {
-//         if (intersects[i].object.id == 29 | 
-// intersects[i].object.id == 31 | 
-// intersects[i].object.id == 33 | 
-// intersects[i].object.id == 34 | 
-// intersects[i].object.id == 32 | 
-// intersects[i].object.id == 30 ) {
-//             camera.position.set( 0, 20, -50 );
-//         }
-if(intersects[i].object.id == 4){
-             camera.position.set( 10, 10, -10);
+        if (intersects[i].object.id == 29 | 
+intersects[i].object.id == 31 | 
+intersects[i].object.id == 33 | 
+intersects[i].object.id == 34 | 
+intersects[i].object.id == 32 | 
+intersects[i].object.id == 30 ) {
+            camera.position.set( 10, 10, -10 );
+        }
+    }
+// if(intersects[i].object.name == 'leon'){
+//              camera.position.set( 10, 10, -10);
     
-   }
-}
+//    }
+// }
    console.log(intersects)
 });
 // 29 main.js:86:33

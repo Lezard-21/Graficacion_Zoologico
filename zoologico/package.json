@@ -12,6 +12,8 @@
     "vite": "^4.4.5"
   },
   "dependencies": {
-    "three": "^0.156.1"
+    "@tweenjs/tween.js": "^21.0.0",
+    "three": "^0.156.1",
+    "three.interactive": "^1.7.0"
   }
 }
