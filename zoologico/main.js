@@ -12,6 +12,8 @@ import gsap from 'gsap'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 import { InteractionManager } from "three.interactive";
 
+import {CSS2DObject, CSS2DRenderer} from 'three/examples/jsm/renderers/CSS2DRenderer'
+
 const scene = new THREE.Scene();
 //scene.fog = new THREE.FogExp2( 0xcccccc, 0.02 );
 
@@ -30,7 +32,13 @@ camera.position.setZ(30);
 
 camera.position.set(0, 20, -10);
 
-
+const labelRenderer = new CSS2DRenderer()
+labelRenderer.setSize(window.innerWidth, window.innerHeight)
+labelRenderer.domElement.style.position = 'absolute'
+labelRenderer.domElement.style.top = '0px'
+labelRenderer.domElement.style.pointerEvents = 'none'
+labelRenderer.domElement.style.zIndex = '2'
+document.body.appendChild(labelRenderer.domElement)
 
 render.render(scene, camera);
 
@@ -127,7 +135,8 @@ function animate(time) {
     //torus.position.y = 0.1;
     //if (mixer)
     mixer.update(clock.getDelta());
-    interactionManager.update();
+    //interactionManager.update();
+    labelRenderer.render(scene,camera)
     controls.update();
     render.render(scene, camera);
 
@@ -172,7 +181,17 @@ render.domElement.addEventListener('dblclick', (e) => {
                     camera.lookAt(1, 0, 0)
                 }
             }, 2);
+
             controls.enabled = false
+
+            const p = document.createElement('p')
+            p.textContent = `El león (Panthera leo) es un mamífero carnívoro de la familia de los félidos y una de las cinco especies del género Panthera. Los leones salvajes viven en poblaciones cada vez más dispersas y fragmentadas del África subsahariana (a excepción de las regiones selváticas de la costa del Atlántico y la cuenca del Congo) y una pequeña zona del noroeste de India (una población en peligro crítico en el parque nacional del Bosque de Gir y alrededores), habiendo desaparecido del resto de Asia del Sur, Asia Occidental, África del Norte y la península balcánica en tiempos históricos. Hasta finales del Pleistoceno, hace aproximadamente diez mil años, de los grandes mamíferos terrestres, el león era el más extendido tras los humanos. Su distribución cubría la mayor parte de África, gran parte de Eurasia, desde el oeste de Europa hasta la India, y en América, desde el río Yukón hasta el sur de México.3​4​5​ `
+            const divInfo = document.createElement('div')
+            divInfo.appendChild(p)
+            divInfo.id = "divInfo"
+            const cDiv = new CSS2DObject(divInfo)
+            //const cPintLabel = new CSS2DObject(p)
+            scene.add(cDiv)
         }
     }
 });
