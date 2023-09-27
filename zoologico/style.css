@@ -30,3 +30,11 @@ label{
   color: white;
   font-size: 2rem;
 }
+
+#divInfo{
+  width: 300px;
+  height: 400px;
+  background-color: darkgrey;
+  border-radius: 10px;
+  border: 10px dashed black;
+}
