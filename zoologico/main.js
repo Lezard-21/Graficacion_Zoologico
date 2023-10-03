@@ -184,11 +184,46 @@ render.domElement.addEventListener('dblclick', (e) => {
 
             controls.enabled = false
 
+            const cont1 = document.createElement("div")
+            cont1.id = "cont1"
+            const cont2 = document.createElement("div")
+            cont2.id = "cont2"
+            const cont3 = document.createElement("div")
+            cont3.id = "cont3"
+
+            const btnCerrar = document.createElement('button')
+            btnCerrar.id = "btnCerrar"
+
+
+            const iconoAnimal = document.createElement('img')
+            iconoAnimal.id = "iconoAnimal"
+            iconoAnimal.src = "/Imagenes/Leon.png"
+
             const p = document.createElement('p')
-            p.textContent = `El león (Panthera leo) es un mamífero carnívoro de la familia de los félidos y una de las cinco especies del género Panthera. Los leones salvajes viven en poblaciones cada vez más dispersas y fragmentadas del África subsahariana (a excepción de las regiones selváticas de la costa del Atlántico y la cuenca del Congo) y una pequeña zona del noroeste de India (una población en peligro crítico en el parque nacional del Bosque de Gir y alrededores), habiendo desaparecido del resto de Asia del Sur, Asia Occidental, África del Norte y la península balcánica en tiempos históricos. Hasta finales del Pleistoceno, hace aproximadamente diez mil años, de los grandes mamíferos terrestres, el león era el más extendido tras los humanos. Su distribución cubría la mayor parte de África, gran parte de Eurasia, desde el oeste de Europa hasta la India, y en América, desde el río Yukón hasta el sur de México.3​4​5​ `
+            p.id = "infoAnimal"
+            p.textContent = `El león es un animal majestuoso que vive principalmente en África y Asia. Es conocido como el Rey de la Selva por su gran tamaño y su rugido fuerte que se puede escuchar a kilómetros de distancia. Los leones son carnívoros y se alimentan de otros animales como búfalos, cebras y gacelas. Los machos se distinguen por su melena grande y las hembras, que no tienen melena, son las que suelen cazar para la manada. Los leones son muy sociables y viven en grupos llamados manadas`
+
+            const nombreAnimal = document.createElement('h1')
+            nombreAnimal.id = "nombreAnimal"
+            nombreAnimal.textContent = "León"
+
+            const btnSonido = document.createElement("button")
+            btnSonido.id = "btnSonido"
+
+
             const divInfo = document.createElement('div')
-            divInfo.appendChild(p)
             divInfo.id = "divInfo"
+
+            cont1.appendChild(btnCerrar)
+            cont2.appendChild(iconoAnimal)
+            cont2.appendChild(nombreAnimal)
+            cont2.appendChild(p)
+            cont3.appendChild(btnSonido)
+            
+           divInfo.appendChild(cont1)
+           divInfo.appendChild(cont2)
+           divInfo.appendChild(cont3)
+            
             const cDiv = new CSS2DObject(divInfo)
             //const cPintLabel = new CSS2DObject(p)
             scene.add(cDiv)

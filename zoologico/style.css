@@ -32,9 +32,78 @@ label{
 }
 
 #divInfo{
-  width: 300px;
-  height: 400px;
-  background-color: darkgrey;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 400px;
+  height: 600px;
   border-radius: 10px;
-  border: 10px dashed black;
+  background: rgb(249,0,0);
+  background: linear-gradient(170deg, rgba(249,0,0,1) 0%, rgba(218,209,0,1) 100%);
+  box-shadow: 0 25px 50px rgba(0,0,0,0.55);
+  font-family: Arial, Helvetica, sans-serif;
+  padding: 30px;
+}
+
+#cont1{
+  width: 100%;
+  text-align: end;
+}
+
+#cont2{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#cont3{
+  width: 100%;
+  height: 10px;
+  background-color: transparent;
+  display: flex;
+  justify-content: center;
+}
+
+#iconoAnimal{
+  height: 150px;
+  width: 150px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+#nombreAnimal{
+  color: white;
+}
+
+#infoAnimal{
+  color: white;
+  text-align: justify;
+  font-size: large;
+}
+
+#btnSonido{
+  background-image: url("/Imagenes/audio.png");
+  width: 64px;
+  height: 64px;
+  background-color: transparent;
+  background-repeat: no-repeat;
+  border: none;
+  cursor: pointer;
+  overflow: hidden;
+  outline: none;
+  object-fit: fill;
+}
+
+#btnCerrar{
+  background-image: url("/Imagenes/x.png");
+  width: 36px;
+  height: 36px;
+  background-color: transparent;
+  background-repeat: no-repeat;
+  border: none;
+  cursor: pointer;
+  overflow: hidden;
+  outline: none;
+  position: absolute;
+  margin-left: -30px;
 }
