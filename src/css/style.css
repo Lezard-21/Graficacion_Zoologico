@@ -82,7 +82,7 @@ label{
 }
 
 #btnSonido{
-  background-image: url("/Imagenes/audio.png");
+  background-image: url("img/audio.png");
   width: 64px;
   height: 64px;
   background-color: transparent;
@@ -95,7 +95,7 @@ label{
 }
 
 #btnCerrar{
-  background-image: url("/Imagenes/x.png");
+  background-image: url("img/x.png");
   width: 36px;
   height: 36px;
   background-color: transparent;

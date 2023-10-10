@@ -1,4 +1,4 @@
-import './style.css'
+import './css/style.css'
 
 import * as THREE from 'three';
 
@@ -74,7 +74,7 @@ const interactionManager = new InteractionManager(
 );
 
 let model
-loader.load('scene.glb', function (gltf) {
+loader.load('/models/scene.glb', function (gltf) {
 
     model = gltf.scene;
     scene.add(model);
@@ -124,7 +124,7 @@ scene.add(lightHelper, gridHelper)
 const controls = new MapControls(camera, render.domElement)
 
 
-const background = new THREE.TextureLoader().load('butter dog.jpg');
+const background = new THREE.TextureLoader().load('img/butter dog.jpg');
 scene.background = background;
 
 function animate(time) {
@@ -197,7 +197,7 @@ render.domElement.addEventListener('dblclick', (e) => {
 
             const iconoAnimal = document.createElement('img')
             iconoAnimal.id = "iconoAnimal"
-            iconoAnimal.src = "/Imagenes/Leon.png"
+            iconoAnimal.src = "../img/Leon.png"
 
             const p = document.createElement('p')
             p.id = "infoAnimal"
