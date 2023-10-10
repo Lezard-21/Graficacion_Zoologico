@@ -210,7 +210,6 @@ render.domElement.addEventListener('dblclick', (e) => {
             const btnSonido = document.createElement("button")
             btnSonido.id = "btnSonido"
 
-
             const divInfo = document.createElement('div')
             divInfo.id = "divInfo"
 
