@@ -39,7 +39,7 @@ label{
   height: 600px;
   border-radius: 10px;
   font-family: Arial, Helvetica, sans-serif;
-  background-image: url("img/fondoSav2.jfif");
+  background-image:linear-gradient(rgba(0,0,0,0.30),rgba(0,0,0,0.10)), url("img/fondoSav2.jfif");
   background-size: 100% 100%;
   background-repeat: no-repeat;
   border-radius: 16px;
@@ -57,12 +57,13 @@ label{
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding: 20px 20px 0px 20px;
+  border-radius: 20px;
 }
 
 #cont3{
   width: 100%;
-  height: 10px;
-  background-color: transparent;
+  height: 128px;
   display: flex;
   justify-content: center;
 }
@@ -72,36 +73,39 @@ label{
   width: 150px;
   object-fit: cover;
   border-radius: 50%;
+  border: 5px  solid white;
+  box-shadow: 0px 10px 50px black;
 }
 
 #nombreAnimal{
   color: white;
-  backdrop-filter: brightness(20%);
   width: 100%;
   text-align: center;
-
+  box-shadow: 0px 10px 50px black;
+  background-color: rgb(218, 95, 24);
+  border-radius: 20px;
 }
 
 #infoAnimal{
-  color: white;
+  width: auto;
+  height: auto;
+  border-radius: 10px;
+  color: rgb(255, 255, 255);
   text-align: justify;
   font-size: large;
-  backdrop-filter: brightness(20%);
+  backdrop-filter: blur(3px);
+  box-shadow: 0px 10px 50px black;
+  margin-top: 0px;
 }
 
 #btnSonido{
-  background-image: url("img/audio.png");
-  width: 64px;
-  height: 64px;
+  background-image: url("img/sound2.png");
+  width: 130px;
+  height: 128px;
   background-color: transparent;
   background-repeat: no-repeat;
   border: none;
-  cursor: pointer;
-  overflow: hidden;
-  outline: none;
-  object-fit: fill;
 }
-
 
 #btnCerrar{
   background-image: url("img/x.png");
