@@ -230,10 +230,10 @@ render.domElement.addEventListener('dblclick', (e) => {
     }
 });
 
-render.domElement.addEventListener('click', (e)=>{
-    const audio = new Audio("/public/audio/sonidoLeon.mp3")
-    audio.play()
-})
+// render.domElement.addEventListener('click', (e)=>{
+//     const audio = new Audio("/public/audio/sonidoLeon.mp3")
+//     audio.play()
+// })
 
 window.addEventListener('resize', () => {
     camera.aspect = window.innerWidth / window.innerHeight
