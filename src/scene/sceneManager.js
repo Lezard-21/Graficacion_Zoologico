@@ -84,10 +84,17 @@ export default class SceneManager {
                     const intersects = rayCaster.intersectObjects(e.getModel().children, true);
                     let nodeMap = new Map();
                     nodeMap = e.getNodes();
+                    //este es para que pare el bucle y isintersected es unico para cada animal
+                    let intersection = false;
                     for (let i = 0; i < intersects.length; i++) {
                         nodeMap.forEach(element => {
                             if (intersects[i].object.id == element) {
-                                e.setCard(scene,camera,conts,labelRenderer);
+                                if (!intersection) {
+                                    document.body.appendChild(labelRenderer.domElement)
+                                    e.setCard(scene,camera,conts,labelRenderer);
+                                    e.setIntersected()
+                                    intersection = true;
+                                }
                             }
                         });
                         console.log(intersects.length)
@@ -125,10 +132,10 @@ export default class SceneManager {
             const sceneSubjects = [
                 //aqui solo se crean mas entidades para agregarlas a la esena
                 new Mono(scene,LoadingManager,-10,0,10),
-                // new Mono(scene,LoadingManager,-13,0,5),
+                //new Mono(scene,LoadingManager,-13,0,5),
                 new Leon(scene,LoadingManager,10,0,10),
-                // new Leon(scene,LoadingManager,-10,0,10),
-                // new Leon(scene,LoadingManager,10,0,-10),
+                //new Leon(scene,LoadingManager,-10,0,10),
+                //new Leon(scene,LoadingManager,10,0,-10),
                 new Sabana(scene, LoadingManager,-5,0,0),
                 // new Tundra(scene, LoadingManager,-15,0,-15),
                 // new Bosque(scene, LoadingManager,15,0,-45),
