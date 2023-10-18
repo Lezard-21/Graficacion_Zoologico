@@ -87,27 +87,12 @@ export default class SceneManager {
                     for (let i = 0; i < intersects.length; i++) {
                         nodeMap.forEach(element => {
                             if (intersects[i].object.id == element) {
-                                e.setCard(scene,camera,conts);
+                                e.setCard(scene,camera,conts,labelRenderer);
                             }
                         });
                         console.log(intersects.length)
                     }
                 });
-                
-
-                //for (let i = 0; i < intersects.length; i++) {
-                //     sceneSubjects.forEach(e => {
-                //         let nodes = e.getNodes();
-                //         nodes.forEach(element => {
-                //             if (intersects[i].object.id == element.value ) {
-                //                 console.log(xd);
-                //             }
-                //         });
-                        
-                //     });
-                // }
-
-
             });
         }
 
@@ -144,13 +129,10 @@ export default class SceneManager {
                 new Leon(scene,LoadingManager,10,0,10),
                 // new Leon(scene,LoadingManager,-10,0,10),
                 // new Leon(scene,LoadingManager,10,0,-10),
-                new Sabana(scene, LoadingManager,15,0,15),
-                new Sabana(scene, LoadingManager,-15,0,15),
-                new Sabana(scene, LoadingManager,15,0,-15),
-                new Tundra(scene, LoadingManager,-15,0,-15),
-                new Bosque(scene, LoadingManager,-15,0,-45),
-                new Bosque(scene, LoadingManager,15,0,-45),
-                //new SceneSubject(scene)
+                new Sabana(scene, LoadingManager,-5,0,0),
+                // new Tundra(scene, LoadingManager,-15,0,-15),
+                // new Bosque(scene, LoadingManager,15,0,-45),
+                // //new SceneSubject(scene)
             ];
             return sceneSubjects;
         }
