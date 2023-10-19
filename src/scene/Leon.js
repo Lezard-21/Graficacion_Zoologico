@@ -65,23 +65,23 @@ class Leon {
       const tl = gsap.timeline();
       //0,20,30
       tl.to(camera.position, {
-        x: -5,
-        y: 10,
+        x: 5,
+        y: 3,
         z: 20,
         duration: 2,
         onUpdate: () => {
-          camera.lookAt(1, 5, 0)
+          camera.lookAt(10, 5, 0)
         }
       })
-      tl.to(camera.position, {
-        x: -9,
-        y: 3,
-        z: 15,
-        duration: 1.5,
-        onUpdate: () => {
-          camera.lookAt(1, 5, 0)
-        }
-      }, 2);
+      // tl.to(camera.position, {
+      //   x: 9,
+      //   y: 3,
+      //   z: 15,
+      //   duration: 1.5,
+      //   onUpdate: () => {
+      //     camera.lookAt(10, 5, 0)
+      //   }
+      // }, 2);
 
       controls.enabled = false
       if(!this.isIntersected()){
