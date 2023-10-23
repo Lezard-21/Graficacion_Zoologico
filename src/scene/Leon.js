@@ -50,32 +50,51 @@ class Leon {
     this.getNodes = () => {
       return nodes;
     }
-    this.setCard = (scene, camera, controls) => {
 
-      const audio = new Audio('/audio/sonidoLeon.mp3');
-      audio.play();
+    this.setIntersected = ()=>{
+      this.intersected = true;
+    }
+    this.isIntersected = ()=>{
+      return this.intersected;
+    }
+    
+
+    this.setCard = (scene, camera, controls,labelRenderer) => {
+      //console.log(camera.position)
       // camera.position.set( 6.2, 5, -6 );
       const tl = gsap.timeline();
+      //0,20,30
       tl.to(camera.position, {
-        x: 6.2,
-        y: 5,
-        z: -6,
-        duration: 1.5,
+        x: 5,
+        y: 3,
+        z: 20,
+        duration: 2,
         onUpdate: () => {
-          camera.lookAt(1, 0, 0)
+          camera.lookAt(10, 5, 0)
         }
       })
-      tl.to(camera.position, {
-        x: 15,
-        y: 5,
-        z: -6,
-        duration: 1.5,
-        onUpdate: () => {
-          camera.lookAt(1, 0, 0)
-        }
-      }, 2);
+      // tl.to(camera.position, {
+      //   x: 9,
+      //   y: 3,
+      //   z: 15,
+      //   duration: 1.5,
+      //   onUpdate: () => {
+      //     camera.lookAt(10, 5, 0)
+      //   }
+      // }, 2);
 
       controls.enabled = false
+      if(!this.isIntersected()){
+        this.cDiv = this.getHtml(camera,labelRenderer,controls);
+        //const cPintLabel = new CSS2DObject(p)
+        scene.add(this.cDiv)
+      }
+      
+    }
+
+    this.getHtml = (camera,labelRenderer,controls)=> {
+      const audio = new Audio('/audio/sonidoLeon.mp3');
+      audio.play();
 
       const cont1 = document.createElement("div")
       cont1.id = "cont1"
@@ -84,9 +103,7 @@ class Leon {
       const cont3 = document.createElement("div")
       cont3.id = "cont3"
 
-      const btnCerrar = document.createElement('button')
-      btnCerrar.id = "btnCerrar"
-
+      const btnCerrar = this.getCloseButon(camera,labelRenderer,controls);
 
       const iconoAnimal = document.createElement('img')
       iconoAnimal.id = "iconoAnimal"
@@ -100,14 +117,7 @@ class Leon {
       nombreAnimal.id = "nombreAnimal"
       nombreAnimal.textContent = "León"
 
-      const btnSonido = document.createElement("button")
-      btnSonido.id = "btnSonido"
-
-      // Esta linea permite ponerle un event listener
-      btnSonido.style.pointerEvents = "stroke"
-      btnSonido.addEventListener('pointerdown',()=>{
-        audio.play()
-      });
+      const btnSonido = this.getAudioeButon(audio);
 
       const divInfo = document.createElement('div')
       divInfo.id = "divInfo"
@@ -122,9 +132,40 @@ class Leon {
       divInfo.appendChild(cont2)
       divInfo.appendChild(cont3)
 
-      const cDiv = new CSS2DObject(divInfo)
-      //const cPintLabel = new CSS2DObject(p)
-      scene.add(cDiv)
+      return new CSS2DObject(divInfo)
+    }
+
+    this.getCloseButon = (camera,labelRenderer,controls)=> {
+      const btnCerrar = document.createElement('button')
+      btnCerrar.id = "btnCerrar"
+      btnCerrar.style.pointerEvents = "stroke"
+      btnCerrar.addEventListener('pointerdown', () => {
+        const tl = gsap.timeline();
+        tl.to(camera.position, {
+          x: 0,
+          y: 20,
+          z: 30,
+          duration: 2,
+          onUpdate: () => {
+            camera.lookAt(1, 0, 0)
+          }
+        })
+        controls.enabled = true;
+        //para eliminar la card //terminar
+        labelRenderer.domElement.remove(this.cDiv)
+      });
+      return btnCerrar;
+    }
+
+    this.getAudioeButon = (audio)=>{
+      const btnSonido = document.createElement("button")
+      btnSonido.id = "btnSonido"
+      // Esta linea permite ponerle un event listener
+      btnSonido.style.pointerEvents = "stroke"
+      btnSonido.addEventListener('pointerdown', () => {
+        audio.play()
+      });
+      return btnSonido;
     }
   }
 }

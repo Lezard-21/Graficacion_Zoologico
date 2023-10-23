@@ -6,6 +6,7 @@ import { CSS2DObject } from 'three/examples/jsm/renderers/CSS2DRenderer'
 class Mono {
   constructor(scene, LoadingManager, x, y, z) {
     this.cDiv;
+    this.intersected = false;
     const loader = new GLTFLoader(LoadingManager);
     let mixer;
     let model;
@@ -50,37 +51,48 @@ class Mono {
     this.getNodes = () => {
       return nodes;
     }
+    this.setIntersected = ()=>{
+      this.intersected = true;
+    }
+    this.isIntersected = ()=>{
+      return this.intersected;
+    }
+    
 
     this.setCard = (scene, camera, controls,labelRenderer) => {
-      console.log(camera.position)
+      //console.log(camera.position)
       // camera.position.set( 6.2, 5, -6 );
       const tl = gsap.timeline();
+      //0,20,30
       tl.to(camera.position, {
-        x: 6.2,
-        y: 5,
-        z: -6,
-        duration: 1.5,
+        x: -5,
+        y: 10,
+        z: 20,
+        duration: 2,
         onUpdate: () => {
-          camera.lookAt(1, 0, 0)
+          camera.lookAt(1, 5, 0)
         }
       })
       tl.to(camera.position, {
-        x: 15,
-        y: 5,
-        z: -6,
+        x: -9,
+        y: 3,
+        z: 15,
         duration: 1.5,
         onUpdate: () => {
-          camera.lookAt(1, 0, 0)
+          camera.lookAt(1, 5, 0)
         }
       }, 2);
 
       controls.enabled = false
-      this.cDiv = this.getHtml(camera,labelRenderer);
-      //const cPintLabel = new CSS2DObject(p)
-      scene.add(this.cDiv)
+      if(!this.isIntersected()){
+        this.cDiv = this.getHtml(camera,labelRenderer,controls);
+        //const cPintLabel = new CSS2DObject(p)
+        scene.add(this.cDiv)
+      }
+      
     }
 
-    this.getHtml = (camera,labelRenderer)=> {
+    this.getHtml = (camera,labelRenderer,controls)=> {
       const audio = new Audio('/audio/sonidoLeon.mp3');
       audio.play();
 
@@ -91,7 +103,7 @@ class Mono {
       const cont3 = document.createElement("div")
       cont3.id = "cont3"
 
-      const btnCerrar = this.getCloseButon(camera,labelRenderer);
+      const btnCerrar = this.getCloseButon(camera,labelRenderer,controls);
 
       const iconoAnimal = document.createElement('img')
       iconoAnimal.id = "iconoAnimal"
@@ -123,7 +135,7 @@ class Mono {
       return new CSS2DObject(divInfo)
     }
 
-    this.getCloseButon = (camera,labelRenderer)=> {
+    this.getCloseButon = (camera,labelRenderer,controls)=> {
       const btnCerrar = document.createElement('button')
       btnCerrar.id = "btnCerrar"
       btnCerrar.style.pointerEvents = "stroke"
@@ -138,6 +150,7 @@ class Mono {
             camera.lookAt(1, 0, 0)
           }
         })
+        controls.enabled = true;
         //para eliminar la card //terminar
         labelRenderer.domElement.remove(this.cDiv)
       });
