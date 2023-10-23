@@ -59,9 +59,9 @@ class Mono {
     }
     
 
-    this.setCard = (scene, camera, controls,labelRenderer) => {
-      //console.log(camera.position)
-      // camera.position.set( 6.2, 5, -6 );
+    this.setCard = (scene, camera, controls,labelRenderer,intersection) => {
+
+      this.scene = scene;
       const tl = gsap.timeline();
       //0,20,30
       tl.to(camera.position, {
@@ -84,9 +84,10 @@ class Mono {
       }, 2);
 
       controls.enabled = false
-      if(!this.isIntersected()){
+      if(!this.isIntersected() && !intersection){
         this.cDiv = this.getHtml(camera,labelRenderer,controls);
-        //const cPintLabel = new CSS2DObject(p)
+        scene.add(this.cDiv)
+      }else{
         scene.add(this.cDiv)
       }
       
@@ -111,7 +112,7 @@ class Mono {
 
       const p = document.createElement('p')
       p.id = "infoAnimal"
-      p.textContent = `El león es un animal majestuoso que vive principalmente en África y Asia. Es conocido como el Rey de la Selva por su gran tamaño y su rugido fuerte que se puede escuchar a kilómetros de distancia. Los leones son carnívoros y se alimentan de otros animales como búfalos, cebras y gacelas. Los machos se distinguen por su melena grande y las hembras, que no tienen melena, son las que suelen cazar para la manada. Los leones son muy sociables y viven en grupos llamados manadas`
+      p.textContent = `mono`
 
       const nombreAnimal = document.createElement('h1')
       nombreAnimal.id = "nombreAnimal"
@@ -151,8 +152,8 @@ class Mono {
           }
         })
         controls.enabled = true;
-        //para eliminar la card //terminar
-        labelRenderer.domElement.remove(this.cDiv)
+        this.scene.remove(this.cDiv)
+         labelRenderer.domElement.removeChild(this.cDiv);
       });
       return btnCerrar;
     }

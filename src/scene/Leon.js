@@ -59,9 +59,8 @@ class Leon {
     }
     
 
-    this.setCard = (scene, camera, controls,labelRenderer) => {
-      //console.log(camera.position)
-      // camera.position.set( 6.2, 5, -6 );
+    this.setCard = (scene, camera, controls,labelRenderer,intersection) => {
+      this.scene = scene;
       const tl = gsap.timeline();
       //0,20,30
       tl.to(camera.position, {
@@ -73,20 +72,12 @@ class Leon {
           camera.lookAt(10, 5, 0)
         }
       })
-      // tl.to(camera.position, {
-      //   x: 9,
-      //   y: 3,
-      //   z: 15,
-      //   duration: 1.5,
-      //   onUpdate: () => {
-      //     camera.lookAt(10, 5, 0)
-      //   }
-      // }, 2);
 
       controls.enabled = false
-      if(!this.isIntersected()){
+      if(!this.isIntersected() && !intersection){
         this.cDiv = this.getHtml(camera,labelRenderer,controls);
-        //const cPintLabel = new CSS2DObject(p)
+        scene.add(this.cDiv)
+      }else{
         scene.add(this.cDiv)
       }
       
@@ -151,8 +142,8 @@ class Leon {
           }
         })
         controls.enabled = true;
-        //para eliminar la card //terminar
-        labelRenderer.domElement.remove(this.cDiv)
+        this.scene.remove(this.cDiv)
+         labelRenderer.domElement.removeChild(this.cDiv);
       });
       return btnCerrar;
     }

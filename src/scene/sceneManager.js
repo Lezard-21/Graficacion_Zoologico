@@ -20,6 +20,7 @@ export default class SceneManager {
 
         const labelRenderer = new CSS2DRenderer()
         labelRenderer.setSize(window.innerWidth, window.innerHeight)
+        labelRenderer.domElement.id = 'laberRenderer'
         labelRenderer.domElement.style.position = 'absolute'
         labelRenderer.domElement.style.top = '0px'
         labelRenderer.domElement.style.pointerEvents = 'none'
@@ -101,6 +102,7 @@ export default class SceneManager {
                     }
                 });
             });
+            
         }
 
         function setProgressBar(){
