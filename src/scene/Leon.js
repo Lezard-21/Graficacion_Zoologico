@@ -3,16 +3,16 @@ import * as THREE from 'three';
 import gsap from 'gsap'
 import { CSS2DObject } from 'three/examples/jsm/renderers/CSS2DRenderer'
 
-class Mono {
+class Leon {
   constructor(scene, LoadingManager, x, y, z) {
-    this.cDiv;
     const loader = new GLTFLoader(LoadingManager);
     let mixer;
     let model;
     let nodes = new Map();
     let cont = 0;
-    model = loader.load('models/mono.glb', function (gltf) {
+    model = loader.load('models/leon.glb', function (gltf) {
       model = gltf.scene;
+      model.rotateY(110);
       scene.add(model);
       model.position.set(x, y, z)
       mixer = new THREE.AnimationMixer(model);
@@ -50,9 +50,10 @@ class Mono {
     this.getNodes = () => {
       return nodes;
     }
+    this.setCard = (scene, camera, controls) => {
 
-    this.setCard = (scene, camera, controls,labelRenderer) => {
-      console.log(camera.position)
+      const audio = new Audio('/audio/sonidoLeon.mp3');
+      audio.play();
       // camera.position.set( 6.2, 5, -6 );
       const tl = gsap.timeline();
       tl.to(camera.position, {
@@ -75,14 +76,6 @@ class Mono {
       }, 2);
 
       controls.enabled = false
-      this.cDiv = this.getHtml(camera,labelRenderer);
-      //const cPintLabel = new CSS2DObject(p)
-      scene.add(this.cDiv)
-    }
-
-    this.getHtml = (camera,labelRenderer)=> {
-      const audio = new Audio('/audio/sonidoLeon.mp3');
-      audio.play();
 
       const cont1 = document.createElement("div")
       cont1.id = "cont1"
@@ -91,7 +84,9 @@ class Mono {
       const cont3 = document.createElement("div")
       cont3.id = "cont3"
 
-      const btnCerrar = this.getCloseButon(camera,labelRenderer);
+      const btnCerrar = document.createElement('button')
+      btnCerrar.id = "btnCerrar"
+
 
       const iconoAnimal = document.createElement('img')
       iconoAnimal.id = "iconoAnimal"
@@ -105,7 +100,14 @@ class Mono {
       nombreAnimal.id = "nombreAnimal"
       nombreAnimal.textContent = "León"
 
-      const btnSonido = this.getAudioeButon(audio);
+      const btnSonido = document.createElement("button")
+      btnSonido.id = "btnSonido"
+
+      // Esta linea permite ponerle un event listener
+      btnSonido.style.pointerEvents = "stroke"
+      btnSonido.addEventListener('pointerdown',()=>{
+        audio.play()
+      });
 
       const divInfo = document.createElement('div')
       divInfo.id = "divInfo"
@@ -120,41 +122,11 @@ class Mono {
       divInfo.appendChild(cont2)
       divInfo.appendChild(cont3)
 
-      return new CSS2DObject(divInfo)
-    }
-
-    this.getCloseButon = (camera,labelRenderer)=> {
-      const btnCerrar = document.createElement('button')
-      btnCerrar.id = "btnCerrar"
-      btnCerrar.style.pointerEvents = "stroke"
-      btnCerrar.addEventListener('pointerdown', () => {
-        const tl = gsap.timeline();
-        tl.to(camera.position, {
-          x: 0,
-          y: 20,
-          z: 30,
-          duration: 2,
-          onUpdate: () => {
-            camera.lookAt(1, 0, 0)
-          }
-        })
-        //para eliminar la card //terminar
-        labelRenderer.domElement.remove(this.cDiv)
-      });
-      return btnCerrar;
-    }
-
-    this.getAudioeButon = (audio)=>{
-      const btnSonido = document.createElement("button")
-      btnSonido.id = "btnSonido"
-      // Esta linea permite ponerle un event listener
-      btnSonido.style.pointerEvents = "stroke"
-      btnSonido.addEventListener('pointerdown', () => {
-        audio.play()
-      });
-      return btnSonido;
+      const cDiv = new CSS2DObject(divInfo)
+      //const cPintLabel = new CSS2DObject(p)
+      scene.add(cDiv)
     }
   }
 }
 
-export default Mono;
+export default Leon;
