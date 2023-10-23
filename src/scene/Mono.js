@@ -107,15 +107,15 @@ class Mono {
 
       const iconoAnimal = document.createElement('img')
       iconoAnimal.id = "iconoAnimal"
-      iconoAnimal.src = "../img/Leon.png"
+      iconoAnimal.src = "../img/Mono.jfif"
 
       const p = document.createElement('p')
       p.id = "infoAnimal"
-      p.textContent = `El león es un animal majestuoso que vive principalmente en África y Asia. Es conocido como el Rey de la Selva por su gran tamaño y su rugido fuerte que se puede escuchar a kilómetros de distancia. Los leones son carnívoros y se alimentan de otros animales como búfalos, cebras y gacelas. Los machos se distinguen por su melena grande y las hembras, que no tienen melena, son las que suelen cazar para la manada. Los leones son muy sociables y viven en grupos llamados manadas`
+      p.textContent = `Los monos son animales muy interesantes y divertidos. Son mamíferos, como nosotros, y tienen cuatro patas y una cola. Los monos viven en diferentes partes del mundo, sobre todo en los bosques tropicales de África y América. Les gusta trepar por los árboles y comer frutas, hojas, insectos y otros animales pequeños. Los monos son muy inteligentes y pueden usar herramientas, como piedras o palos, para conseguir comida o defenderse. También se comunican entre ellos con sonidos y gestos.`
 
       const nombreAnimal = document.createElement('h1')
       nombreAnimal.id = "nombreAnimal"
-      nombreAnimal.textContent = "León"
+      nombreAnimal.textContent = "Mono"
 
       const btnSonido = this.getAudioeButon(audio);
 
