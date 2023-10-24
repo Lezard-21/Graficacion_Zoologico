@@ -59,9 +59,8 @@ class Leon {
     }
     
 
-    this.setCard = (scene, camera, controls,labelRenderer) => {
-      //console.log(camera.position)
-      // camera.position.set( 6.2, 5, -6 );
+    this.setCard = (scene, camera, controls,labelRenderer,intersection) => {
+      this.scene = scene;
       const tl = gsap.timeline();
       //0,20,30
       tl.to(camera.position, {
@@ -73,20 +72,12 @@ class Leon {
           camera.lookAt(10, 5, 0)
         }
       })
-      // tl.to(camera.position, {
-      //   x: 9,
-      //   y: 3,
-      //   z: 15,
-      //   duration: 1.5,
-      //   onUpdate: () => {
-      //     camera.lookAt(10, 5, 0)
-      //   }
-      // }, 2);
 
       controls.enabled = false
-      if(!this.isIntersected()){
+      if(!this.isIntersected() && !intersection){
         this.cDiv = this.getHtml(camera,labelRenderer,controls);
-        //const cPintLabel = new CSS2DObject(p)
+        scene.add(this.cDiv)
+      }else{
         scene.add(this.cDiv)
       }
       
@@ -116,11 +107,13 @@ class Leon {
       const nombreAnimal = document.createElement('h1')
       nombreAnimal.id = "nombreAnimal"
       nombreAnimal.textContent = "León"
+      nombreAnimal.style.backgroundColor = "rgb(218, 95, 24)"
 
       const btnSonido = this.getAudioeButon(audio);
 
       const divInfo = document.createElement('div')
       divInfo.id = "divInfo"
+      divInfo.style.backgroundImage = "linear-gradient(rgba(0,0,0,0.30),rgba(0,0,0,0.10)), url('img/fondoSav2.jfif')"
 
       cont1.appendChild(btnCerrar)
       cont2.appendChild(iconoAnimal)
@@ -151,8 +144,8 @@ class Leon {
           }
         })
         controls.enabled = true;
-        //para eliminar la card //terminar
-        labelRenderer.domElement.remove(this.cDiv)
+        this.scene.remove(this.cDiv)
+         labelRenderer.domElement.removeChild(this.cDiv);
       });
       return btnCerrar;
     }
@@ -160,6 +153,7 @@ class Leon {
     this.getAudioeButon = (audio)=>{
       const btnSonido = document.createElement("button")
       btnSonido.id = "btnSonido"
+      btnSonido.style.backgroundImage = "url('img/sound2.png')"
       // Esta linea permite ponerle un event listener
       btnSonido.style.pointerEvents = "stroke"
       btnSonido.addEventListener('pointerdown', () => {

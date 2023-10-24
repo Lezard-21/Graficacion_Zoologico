@@ -59,9 +59,9 @@ class Mono {
     }
     
 
-    this.setCard = (scene, camera, controls,labelRenderer) => {
-      //console.log(camera.position)
-      // camera.position.set( 6.2, 5, -6 );
+    this.setCard = (scene, camera, controls,labelRenderer,intersection) => {
+
+      this.scene = scene;
       const tl = gsap.timeline();
       //0,20,30
       tl.to(camera.position, {
@@ -84,16 +84,17 @@ class Mono {
       }, 2);
 
       controls.enabled = false
-      if(!this.isIntersected()){
+      if(!this.isIntersected() && !intersection){
         this.cDiv = this.getHtml(camera,labelRenderer,controls);
-        //const cPintLabel = new CSS2DObject(p)
+        scene.add(this.cDiv)
+      }else{
         scene.add(this.cDiv)
       }
       
     }
 
     this.getHtml = (camera,labelRenderer,controls)=> {
-      const audio = new Audio('/audio/sonidoLeon.mp3');
+      const audio = new Audio('/audio/sonidoMono.mp3');
       audio.play();
 
       const cont1 = document.createElement("div")
@@ -111,16 +112,19 @@ class Mono {
 
       const p = document.createElement('p')
       p.id = "infoAnimal"
-      p.textContent = `Los monos son animales muy interesantes y divertidos. Son mamíferos, como nosotros, y tienen cuatro patas y una cola. Los monos viven en diferentes partes del mundo, sobre todo en los bosques tropicales de África y América. Les gusta trepar por los árboles y comer frutas, hojas, insectos y otros animales pequeños. Los monos son muy inteligentes y pueden usar herramientas, como piedras o palos, para conseguir comida o defenderse. También se comunican entre ellos con sonidos y gestos.`
+      p.textContent = `Los monos son animales muy inteligentes y divertidos. Viven en diferentes partes del mundo, como África, Asia y América. 
+      Los monos se comunican entre ellos con sonidos, gestos y expresiones faciales. También usan herramientas para conseguir comida o defenderse. Los monos suelen vivir en grupos llamados tropas, donde se cuidan unos a otros. Los monos son muy parecidos a los humanos en muchos aspectos, por eso debemos respetarlos y protegerlos  .`
 
       const nombreAnimal = document.createElement('h1')
       nombreAnimal.id = "nombreAnimal"
       nombreAnimal.textContent = "Mono"
+      nombreAnimal.style.backgroundColor = "rgb(0, 153, 0)"
 
       const btnSonido = this.getAudioeButon(audio);
 
       const divInfo = document.createElement('div')
       divInfo.id = "divInfo"
+      divInfo.style.backgroundImage = "linear-gradient(rgba(0,0,0,0.30),rgba(0,0,0,0.10)), url('img/fondoSelva.jfif')"
 
       cont1.appendChild(btnCerrar)
       cont2.appendChild(iconoAnimal)
@@ -151,8 +155,8 @@ class Mono {
           }
         })
         controls.enabled = true;
-        //para eliminar la card //terminar
-        labelRenderer.domElement.remove(this.cDiv)
+        this.scene.remove(this.cDiv)
+         labelRenderer.domElement.removeChild(this.cDiv);
       });
       return btnCerrar;
     }
@@ -160,6 +164,7 @@ class Mono {
     this.getAudioeButon = (audio)=>{
       const btnSonido = document.createElement("button")
       btnSonido.id = "btnSonido"
+      btnSonido.style.backgroundImage = "url('img/sound4.png')"
       // Esta linea permite ponerle un event listener
       btnSonido.style.pointerEvents = "stroke"
       btnSonido.addEventListener('pointerdown', () => {
