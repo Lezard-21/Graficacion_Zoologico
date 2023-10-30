@@ -4,6 +4,7 @@ import { MapControls } from 'three/addons/controls/MapControls.js';
 import {CSS2DRenderer} from 'three/examples/jsm/renderers/CSS2DRenderer'
 import Mono from './Mono.js'
 import Leon from './Leon.js'
+import Pinguino from './Pinguino'
 import Sabana from './Sabana';
 import Tundra from './Tundra';
 import Bosque from './Bosque';
@@ -134,11 +135,14 @@ export default class SceneManager {
             const sceneSubjects = [
                 //aqui solo se crean mas entidades para agregarlas a la esena
                 new Mono(scene,LoadingManager,-10,0,10),
-                //new Mono(scene,LoadingManager,-13,0,5),
+                new Pinguino(scene,LoadingManager,-13,0,5),
                 new Leon(scene,LoadingManager,10,0,10),
                 //new Leon(scene,LoadingManager,-10,0,10),
                 //new Leon(scene,LoadingManager,10,0,-10),
-                new Sabana(scene, LoadingManager,-5,0,0),
+                // new Bosque(scene, LoadingManager,-5,-10,0),
+                // new Tundra(scene, LoadingManager,50,2.3,0),
+                //new Sabana(scene, LoadingManager,-5,0,0),
+                // new Pinguino(scene,LoadingManager,-10,0,0),
                 // new Tundra(scene, LoadingManager,-15,0,-15),
                 // new Bosque(scene, LoadingManager,15,0,-45),
                 // //new SceneSubject(scene)
