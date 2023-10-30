@@ -10,7 +10,7 @@ class Tundra {
     // let cont = 0;
     model = loader.load('models/nieve.glb', function (gltf) {
       model = gltf.scene;
-      model.scale.set(0.5, 0.5, 0.5);
+      model.scale.set(0.35, 0.35, 0.35);
       scene.add(model);
       model.position.set(x, y, z)
 

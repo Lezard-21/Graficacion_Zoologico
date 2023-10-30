@@ -8,8 +8,9 @@ class Sabana {
     let model;
     // let nodes = new Map();
     // let cont = 0;
-    model = loader.load('models/bosque.glb', function (gltf) {
+    model = loader.load('models/grass2.glb', function (gltf) {
       model = gltf.scene;
+      model.scale.set(0.3, 0.3, 0.3);
       scene.add(model);
       model.position.set(x, y, z)
 

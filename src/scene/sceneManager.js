@@ -8,6 +8,8 @@ import Pinguino from './Pinguino'
 import Sabana from './Sabana';
 import Tundra from './Tundra';
 import Bosque from './Bosque';
+import Zorro from './Zorro';
+import Oso from './Oso';
 
 export default class SceneManager {
     constructor(canvas) {
@@ -64,7 +66,7 @@ export default class SceneManager {
 
         function setLights(scene) {
             const positionLinght = new THREE.PointLight(0xffffff, 10000);
-            positionLinght.position.set(25, 25, 25)
+            positionLinght.position.set(0, 50, 0)
             const ambientLight = new THREE.AmbientLight(0xffffff)
 
             //helper
@@ -135,16 +137,14 @@ export default class SceneManager {
             const sceneSubjects = [
                 //aqui solo se crean mas entidades para agregarlas a la esena
                 new Mono(scene,LoadingManager,-10,0,10),
-                new Pinguino(scene,LoadingManager,-13,0,5),
+                // new Pinguino(scene,LoadingManager,-13,0,5),
                 new Leon(scene,LoadingManager,10,0,10),
-                //new Leon(scene,LoadingManager,-10,0,10),
-                //new Leon(scene,LoadingManager,10,0,-10),
-                // new Bosque(scene, LoadingManager,-5,-10,0),
-                // new Tundra(scene, LoadingManager,50,2.3,0),
-                //new Sabana(scene, LoadingManager,-5,0,0),
-                // new Pinguino(scene,LoadingManager,-10,0,0),
-                // new Tundra(scene, LoadingManager,-15,0,-15),
-                // new Bosque(scene, LoadingManager,15,0,-45),
+                // new Zorro(scene,LoadingManager,-10,0,10),
+                // new Oso(scene,LoadingManager,10,0,-10),
+                /***/
+                new Bosque(scene, LoadingManager,-28,-9,8),
+                new Tundra(scene, LoadingManager,-5,2.3,-25),
+                new Sabana(scene, LoadingManager,20,-1,15),
                 // //new SceneSubject(scene)
             ];
             return sceneSubjects;

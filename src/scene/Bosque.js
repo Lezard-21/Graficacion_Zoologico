@@ -10,6 +10,7 @@ class Bosque {
     // let cont = 0;
     model = loader.load('models/bosque.glb', function (gltf) {
       model = gltf.scene;
+      // model.scale.set(0.8, 0.8, 0.8);
       scene.add(model);
       model.position.set(x, y, z)
 

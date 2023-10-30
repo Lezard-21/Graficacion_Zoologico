@@ -6,7 +6,7 @@ import Fbxloader from 'three-fbxloader-offical';
 
 class Pinguino {
   constructor(scene, LoadingManager, x, y, z) {
-    const loader = new Fbxloader(LoadingManager);
+    const loader = new Fbxloader();
     let mixer;
     let model;
     let nodes = new Map();
@@ -18,7 +18,6 @@ class Pinguino {
       scene.add(model);
       model.position.set(x, y, z)
       mixer = new THREE.AnimationMixer(model);
-      // Asegúrate de que tu modelo FBX contiene animaciones antes de intentar acceder a ellas
       if (object.animations && object.animations.length > 0) {
         const action = mixer.clipAction(object.animations[0]);
         action.play();
