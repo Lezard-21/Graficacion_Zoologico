@@ -145,12 +145,12 @@ export default class SceneManager {
 
         function createSceneSubjects(scene, LoadingManager) {
             const sceneSubjects = [
-                //aqui solo se crean mas entidades para agregarlas a la esena
-                new Mono(scene,LoadingManager,-10,0,10),
-                new Pinguino(scene,LoadingManager,-13,0,5),
+                //aqui solo se crean mas entidades para agregarlas a la esena 10,0,-10
+                new Mono(scene,LoadingManager,16,0,-14),
+                new Pinguino(scene,LoadingManager,-13,5,-20),
                 new Leon(scene,LoadingManager,10,0,10),
-                new Zorro(scene,LoadingManager,-20,2,10),
-                new Oso(scene,LoadingManager,10,0,-10),
+                new Zorro(scene,LoadingManager,-20,2,40),
+                new Oso(scene,LoadingManager,-17,0,10),
                 /**dolores vargas*/
                 new Bosque(scene, LoadingManager,-28,-9,8),
                 new Bosque(scene, LoadingManager,-28,-9,38),

@@ -65,14 +65,23 @@ class Oso {
       const tl = gsap.timeline();
       //0,20,30
       tl.to(camera.position, {
-        x: 5,
-        y: 3,
+        x: -5,
+        y: 10,
         z: 20,
         duration: 2,
         onUpdate: () => {
-          camera.lookAt(10, 5, 0)
+          camera.lookAt(1, 5, 0)
         }
       })
+      tl.to(camera.position, {
+        x: -9,
+        y: 3,
+        z: 15,
+        duration: 1.5,
+        onUpdate: () => {
+          camera.lookAt(-9, 3, 15)
+        }
+      }, 2);
 
       controls.enabled = false
       if(!this.isIntersected() && !intersection){
