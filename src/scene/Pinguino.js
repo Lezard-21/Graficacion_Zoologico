@@ -78,7 +78,7 @@ class Pinguino {
     }
 
     this.getHtml = (camera,labelRenderer,controls)=> {
-      const audio = new Audio('/audio/sonidoLeon.mp3');
+      const audio = new Audio('/audio/sonidoPinguino.mp3');
       audio.play();
 
       const cont1 = document.createElement("div")
@@ -92,22 +92,22 @@ class Pinguino {
 
       const iconoAnimal = document.createElement('img')
       iconoAnimal.id = "iconoAnimal"
-      iconoAnimal.src = "../img/Leon.png"
+      iconoAnimal.src = "../img/pinguino.jpg"
 
       const p = document.createElement('p')
       p.id = "infoAnimal"
-      p.textContent = `El león es un animal majestuoso que vive principalmente en África y Asia. Es conocido como el Rey de la Selva por su gran tamaño y su rugido fuerte que se puede escuchar a kilómetros de distancia. Los leones son carnívoros y se alimentan de otros animales como búfalos, cebras y gacelas. Los machos se distinguen por su melena grande y las hembras, que no tienen melena, son las que suelen cazar para la manada. Los leones son muy sociables y viven en grupos llamados manadas`
+      p.textContent = `Los pingüinos son aves que no pueden volar, pero que son muy buenas nadadoras y buceadoras. Viven en el hemisferio sur del planeta, y algunos de ellos soportan temperaturas muy frías. Hay muchos tipos de pingüinos, y cada uno tiene su propio color, tamaño y forma. Los pingüinos son animales muy interesantes y divertidos, que nos enseñan el valor de la adaptación, la cooperación y la fidelidad. `
 
       const nombreAnimal = document.createElement('h1')
       nombreAnimal.id = "nombreAnimal"
-      nombreAnimal.textContent = "León"
-      nombreAnimal.style.backgroundColor = "rgb(218, 95, 24)"
+      nombreAnimal.textContent = "Pingüino"
+      nombreAnimal.style.backgroundColor = "rgb(0, 0, 0)"
 
       const btnSonido = this.getAudioeButon(audio);
 
       const divInfo = document.createElement('div')
       divInfo.id = "divInfo"
-      divInfo.style.backgroundImage = "linear-gradient(rgba(0,0,0,0.30),rgba(0,0,0,0.10)), url('img/fondoSav2.jfif')"
+      divInfo.style.backgroundImage = "linear-gradient(rgba(0,0,0,0.30),rgba(0,0,0,0.10)), url('img/fondoAntartida.jfif')"
 
       cont1.appendChild(btnCerrar)
       cont2.appendChild(iconoAnimal)
@@ -147,7 +147,7 @@ class Pinguino {
     this.getAudioeButon = (audio)=>{
       const btnSonido = document.createElement("button")
       btnSonido.id = "btnSonido"
-      btnSonido.style.backgroundImage = "url('img/sound2.png')"
+      btnSonido.style.backgroundImage = "url('img/sound3.png')"
       // Esta linea permite ponerle un event listener
       btnSonido.style.pointerEvents = "stroke"
       btnSonido.addEventListener('pointerdown', () => {

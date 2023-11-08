@@ -84,7 +84,7 @@ class Oso {
     }
 
     this.getHtml = (camera,labelRenderer,controls)=> {
-      const audio = new Audio('/audio/sonidoLeon.mp3');
+      const audio = new Audio('/audio/sonidoOso.mp3');
       audio.play();
 
       const cont1 = document.createElement("div")
@@ -98,22 +98,22 @@ class Oso {
 
       const iconoAnimal = document.createElement('img')
       iconoAnimal.id = "iconoAnimal"
-      iconoAnimal.src = "../img/Leon.png"
+      iconoAnimal.src = "../img/oso.jpeg"
 
       const p = document.createElement('p')
       p.id = "infoAnimal"
-      p.textContent = `El león es un animal majestuoso que vive principalmente en África y Asia. Es conocido como el Rey de la Selva por su gran tamaño y su rugido fuerte que se puede escuchar a kilómetros de distancia. Los leones son carnívoros y se alimentan de otros animales como búfalos, cebras y gacelas. Los machos se distinguen por su melena grande y las hembras, que no tienen melena, son las que suelen cazar para la manada. Los leones son muy sociables y viven en grupos llamados manadas`
+      p.textContent = `Los osos son animales grandes y fuertes que viven en diferentes partes del mundo. Hay ocho tipos de osos, y cada uno tiene un color y un hábitat diferente. Algunos osos son blancos y viven en el hielo, como el oso polar. Los osos son mamíferos, lo que significa que toman leche de su mamá cuando son bebés. Los osos tienen un buen olfato y una buena vista, pero sus oídos son pequeños. Los osos pueden correr muy rápido cuando quieren, pero también son tranquilos y solitarios. Algunos osos duermen durante el invierno para ahorrar energía, y se llaman hibernar. Los osos son animales muy interesantes y curiosos, pero también pueden ser peligrosos si se sienten amenazados. Por eso, hay que respetarlos y cuidarlos.`
 
       const nombreAnimal = document.createElement('h1')
       nombreAnimal.id = "nombreAnimal"
-      nombreAnimal.textContent = "León"
-      nombreAnimal.style.backgroundColor = "rgb(218, 95, 24)"
+      nombreAnimal.textContent = "Oso"
+      nombreAnimal.style.backgroundColor = "rgb(100, 56, 16)"
 
       const btnSonido = this.getAudioeButon(audio);
 
       const divInfo = document.createElement('div')
       divInfo.id = "divInfo"
-      divInfo.style.backgroundImage = "linear-gradient(rgba(0,0,0,0.30),rgba(0,0,0,0.10)), url('img/fondoSav2.jfif')"
+      divInfo.style.backgroundImage = "linear-gradient(rgba(0,0,0,0.30),rgba(0,0,0,0.10)), url('img/fondoBosque.jfif')"
 
       cont1.appendChild(btnCerrar)
       cont2.appendChild(iconoAnimal)

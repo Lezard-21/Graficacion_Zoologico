@@ -98,22 +98,22 @@ class Zorro {
 
       const iconoAnimal = document.createElement('img')
       iconoAnimal.id = "iconoAnimal"
-      iconoAnimal.src = "../img/Leon.png"
+      iconoAnimal.src = "../img/zorro.jfif"
 
       const p = document.createElement('p')
       p.id = "infoAnimal"
-      p.textContent = `El león es un animal majestuoso que vive principalmente en África y Asia. Es conocido como el Rey de la Selva por su gran tamaño y su rugido fuerte que se puede escuchar a kilómetros de distancia. Los leones son carnívoros y se alimentan de otros animales como búfalos, cebras y gacelas. Los machos se distinguen por su melena grande y las hembras, que no tienen melena, son las que suelen cazar para la manada. Los leones son muy sociables y viven en grupos llamados manadas`
+      p.textContent = `El zorro es un animal muy inteligente y astuto, que pertenece a la familia de los cánidos, como los perros y los lobos. Hay muchos tipos de zorros, que se diferencian por su color, tamaño y hábitat. Algunos ejemplos son el zorro rojo, el zorro ártico, el zorro fénec y el zorro gris. Los zorros son omnívoros, es decir, que comen tanto plantas como animales. Su dieta puede incluir frutas, semillas, insectos, roedores, aves y huevos. Los zorros son animales nocturnos, que salen a cazar y explorar por la noche. Durante el día, duermen en sus madrigueras, que pueden ser cuevas, troncos o agujeros en el suelo. Los zorros son muy ágiles y veloces, y pueden correr hasta 60 km/h. También tienen un buen sentido del olfato, la vista y el oído, que les ayudan a encontrar su comida y a evitar a sus enemigos.Sin embargo, también pueden ser peligrosos si se sienten amenazados o si tienen rabia. Por eso, hay que respetarlos y protegerlos.`
 
       const nombreAnimal = document.createElement('h1')
       nombreAnimal.id = "nombreAnimal"
-      nombreAnimal.textContent = "León"
+      nombreAnimal.textContent = "Zorro"
       nombreAnimal.style.backgroundColor = "rgb(218, 95, 24)"
 
       const btnSonido = this.getAudioeButon(audio);
 
       const divInfo = document.createElement('div')
       divInfo.id = "divInfo"
-      divInfo.style.backgroundImage = "linear-gradient(rgba(0,0,0,0.30),rgba(0,0,0,0.10)), url('img/fondoSav2.jfif')"
+      divInfo.style.backgroundImage = "linear-gradient(rgba(0,0,0,0.30),rgba(0,0,0,0.10)), url('img/fondoBosque.jfif')"
 
       cont1.appendChild(btnCerrar)
       cont2.appendChild(iconoAnimal)
