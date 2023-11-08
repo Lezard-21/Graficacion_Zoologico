@@ -6,22 +6,27 @@ import Fbxloader from 'three-fbxloader-offical';
 
 class Pinguino {
   constructor(scene, LoadingManager, x, y, z) {
-    const loader = new Fbxloader();
+    const loader = new GLTFLoader(LoadingManager);
     let mixer;
     let model;
     let nodes = new Map();
     let cont = 0;
-
-    loader.load('models/Swimming.fbx', function (object) {
-      model = object;
-      model.rotateY(110);
+    model = loader.load('models/pingu.glb', function (gltf) {
+      model = gltf.scene;
       scene.add(model);
       model.position.set(x, y, z)
       mixer = new THREE.AnimationMixer(model);
-      if (object.animations && object.animations.length > 0) {
-        const action = mixer.clipAction(object.animations[0]);
-        action.play();
-      }
+      const clips = gltf.animations;
+      const clip = THREE.AnimationClip.findByName(clips, 'ArmatureAction');
+      const action = mixer.clipAction(clip);
+      action.play();
+
+      // model.traverse((node)=>{
+      //     if(node.isMesh){
+      //         node.castShadow = true
+      //     }
+      // })
+
       model.traverse((node) => {
         if (node.isMesh) {
           nodes.set(cont, node.id);
@@ -29,6 +34,7 @@ class Pinguino {
         }
       });
       console.log(nodes);
+
     }, undefined, function (error) {
       console.error(error);
     });

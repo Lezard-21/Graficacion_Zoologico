@@ -37,6 +37,8 @@ export default class SceneManager {
         renderer.render(scene,camera);
 
         this.sceneSubjects = createSceneSubjects(scene,LoadingManager);
+        //variable de prueba 
+        let angle = 0; 
         setListeners(this.sceneSubjects);
 
         //helpers
@@ -105,6 +107,14 @@ export default class SceneManager {
                     }
                 });
             });
+
+            window.addEventListener('keyup', (e) => {
+                console.log(camera.position)
+                console.log(camera.rotation)
+                camera.position.x = 30 * Math.cos(angle);
+                camera.position.z = 30 * Math.sin(angle);
+                angle += 0.5;
+            });
             
         }
 
@@ -137,13 +147,15 @@ export default class SceneManager {
             const sceneSubjects = [
                 //aqui solo se crean mas entidades para agregarlas a la esena
                 new Mono(scene,LoadingManager,-10,0,10),
-                // new Pinguino(scene,LoadingManager,-13,0,5),
+                new Pinguino(scene,LoadingManager,-13,0,5),
                 new Leon(scene,LoadingManager,10,0,10),
-                // new Zorro(scene,LoadingManager,-10,0,10),
-                // new Oso(scene,LoadingManager,10,0,-10),
-                /***/
+                new Zorro(scene,LoadingManager,-20,2,10),
+                new Oso(scene,LoadingManager,10,0,-10),
+                /**dolores vargas*/
                 new Bosque(scene, LoadingManager,-28,-9,8),
+                new Bosque(scene, LoadingManager,-28,-9,38),
                 new Tundra(scene, LoadingManager,-5,2.3,-25),
+                new Sabana(scene, LoadingManager,20,-1,-25),
                 new Sabana(scene, LoadingManager,20,-1,15),
                 // //new SceneSubject(scene)
             ];

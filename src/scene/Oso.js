@@ -12,12 +12,13 @@ class Oso {
     let cont = 0;
     model = loader.load('models/oso.glb', function (gltf) {
       model = gltf.scene;
-      model.rotateY(110);
+      model.scale.set(0.2, 0.2, 0.2);
+      model.rotateY(55);
       scene.add(model);
       model.position.set(x, y, z)
       mixer = new THREE.AnimationMixer(model);
       const clips = gltf.animations;
-      const clip = THREE.AnimationClip.findByName(clips, 'ArmatureAction');
+      const clip = THREE.AnimationClip.findByName(clips, 'ArmatureAction.001');
       const action = mixer.clipAction(clip);
       action.play();
 

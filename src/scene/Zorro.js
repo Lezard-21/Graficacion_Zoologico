@@ -12,7 +12,6 @@ class Zorro {
     let cont = 0;
     model = loader.load('models/zorro.glb', function (gltf) {
       model = gltf.scene;
-      model.rotateY(110);
       scene.add(model);
       model.position.set(x, y, z)
       mixer = new THREE.AnimationMixer(model);
