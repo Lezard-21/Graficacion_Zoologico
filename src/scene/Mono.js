@@ -97,6 +97,30 @@ class Mono {
       const audio = new Audio('/audio/sonidoMono.mp3');
       audio.play();
 
+      const gridCont = document.createElement("div")
+      gridCont.id = "gridCont"
+
+      const infGeneral = document.createElement("div")
+      infGeneral.id = "infGeneral"
+
+      const pesoAnimal = document.createElement("p")
+      pesoAnimal.id = "pesoAnimal"
+      pesoAnimal.textContent="Peso promedio: 100g - 35Kg "
+
+      const alimentacion = document.createElement("p")
+      alimentacion.id = "alimentacion"
+      alimentacion.textContent="Alimentacion: Omnivoros"
+
+      const habitadAnimal = document.createElement("p")
+      habitadAnimal.id = "habitadAnimal"
+      habitadAnimal.textContent= "Habitad: Calidos y Tropicales"
+
+      const contVideo = document.createElement("div")
+      contVideo.id = "contVideo"
+
+      const videoAnimal = '<iframe width="400" height="300" src="https://www.youtube.com/embed/l-hMxW7kaEQ?si=6wsXE-xTimk4x2lf" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>'
+      
+
       const cont1 = document.createElement("div")
       cont1.id = "cont1"
       const cont2 = document.createElement("div")
@@ -112,8 +136,7 @@ class Mono {
 
       const p = document.createElement('p')
       p.id = "infoAnimal"
-      p.textContent = `Los monos son animales muy inteligentes y divertidos. Viven en diferentes partes del mundo, como África, Asia y América. 
-      Los monos se comunican entre ellos con sonidos, gestos y expresiones faciales. También usan herramientas para conseguir comida o defenderse. Los monos suelen vivir en grupos llamados tropas, donde se cuidan unos a otros. Los monos son muy parecidos a los humanos en muchos aspectos, por eso debemos respetarlos y protegerlos  .`
+      p.textContent = `Los monos son animales muy inteligentes y divertidos. Viven en diferentes partes del mundo, como África, Asia y América. Los monos son muy parecidos a los humanos en muchos aspectos, por eso debemos respetarlos y protegerlos  .`
 
       const nombreAnimal = document.createElement('h1')
       nombreAnimal.id = "nombreAnimal"
@@ -136,7 +159,20 @@ class Mono {
       divInfo.appendChild(cont2)
       divInfo.appendChild(cont3)
 
-      return new CSS2DObject(divInfo)
+      infGeneral.appendChild(pesoAnimal)
+      infGeneral.appendChild(alimentacion)
+      infGeneral.appendChild(habitadAnimal)
+
+      contVideo.insertAdjacentHTML("afterbegin",videoAnimal)
+
+
+      gridCont.appendChild(divInfo)
+      gridCont.appendChild(infGeneral)
+      gridCont.appendChild(contVideo)
+
+      gridCont.style.pointerEvents = "stroke"
+
+      return new CSS2DObject(gridCont)
     }
 
     this.getCloseButon = (camera,labelRenderer,controls)=> {

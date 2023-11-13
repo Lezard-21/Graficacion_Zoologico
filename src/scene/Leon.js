@@ -94,6 +94,30 @@ class Leon {
       const cont3 = document.createElement("div")
       cont3.id = "cont3"
 
+      const gridCont = document.createElement("div")
+      gridCont.id = "gridCont"
+
+      const infGeneral = document.createElement("div")
+      infGeneral.id = "infGeneral"
+
+      const pesoAnimal = document.createElement("p")
+      pesoAnimal.id = "pesoAnimal"
+      pesoAnimal.textContent="Peso promedio: 120g - 160Kg "
+
+      const alimentacion = document.createElement("p")
+      alimentacion.id = "alimentacion"
+      alimentacion.textContent="Alimentacion: Carnivoros"
+
+      const habitadAnimal = document.createElement("p")
+      habitadAnimal.id = "habitadAnimal"
+      habitadAnimal.textContent= "Habitad: Calidos"
+
+      const contVideo = document.createElement("div")
+      contVideo.id = "contVideo"
+
+      const videoAnimal = '<iframe width="400" height="300" src="https://www.youtube.com/embed/AjWY-Go0gdo?si=_aZek8hhMgmeMaDc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>'
+      
+
       const btnCerrar = this.getCloseButon(camera,labelRenderer,controls);
 
       const iconoAnimal = document.createElement('img')
@@ -102,7 +126,7 @@ class Leon {
 
       const p = document.createElement('p')
       p.id = "infoAnimal"
-      p.textContent = `El león es un animal majestuoso que vive principalmente en África y Asia. Es conocido como el Rey de la Selva por su gran tamaño y su rugido fuerte que se puede escuchar a kilómetros de distancia. Los leones son carnívoros y se alimentan de otros animales como búfalos, cebras y gacelas. Los machos se distinguen por su melena grande y las hembras, que no tienen melena, son las que suelen cazar para la manada. Los leones son muy sociables y viven en grupos llamados manadas`
+      p.textContent = `El león es un animal majestuoso que vive principalmente en África y Asia. Es conocido como el Rey de la Selva por su gran tamaño y su rugido fuerte que se puede escuchar a kilómetros de distancia. Los leones son muy sociables y viven en grupos llamados manadas`
 
       const nombreAnimal = document.createElement('h1')
       nombreAnimal.id = "nombreAnimal"
@@ -125,7 +149,19 @@ class Leon {
       divInfo.appendChild(cont2)
       divInfo.appendChild(cont3)
 
-      return new CSS2DObject(divInfo)
+      infGeneral.appendChild(pesoAnimal)
+      infGeneral.appendChild(alimentacion)
+      infGeneral.appendChild(habitadAnimal)
+
+      contVideo.insertAdjacentHTML("afterbegin",videoAnimal)
+
+      gridCont.appendChild(divInfo)
+      gridCont.appendChild(infGeneral)
+      gridCont.appendChild(contVideo)
+
+      gridCont.style.pointerEvents = "stroke"
+
+      return new CSS2DObject(gridCont)
     }
 
     this.getCloseButon = (camera,labelRenderer,controls)=> {

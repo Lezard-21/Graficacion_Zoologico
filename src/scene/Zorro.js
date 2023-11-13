@@ -10,7 +10,7 @@ class Zorro {
     let model;
     let nodes = new Map();
     let cont = 0;
-    model = loader.load('models/zorro.glb', function (gltf) {
+    model = loader.load('models/zorro2.glb', function (gltf) {
       model = gltf.scene;
       scene.add(model);
       model.position.set(x, y, z)
@@ -93,6 +93,31 @@ class Zorro {
       const cont3 = document.createElement("div")
       cont3.id = "cont3"
 
+      const gridCont = document.createElement("div")
+      gridCont.id = "gridCont"
+
+      const infGeneral = document.createElement("div")
+      infGeneral.id = "infGeneral"
+
+      const pesoAnimal = document.createElement("p")
+      pesoAnimal.id = "pesoAnimal"
+      pesoAnimal.textContent="Peso promedio: 2,2 - 14Kg "
+
+      const alimentacion = document.createElement("p")
+      alimentacion.id = "alimentacion"
+      alimentacion.textContent="Alimentacion: Carnivoros"
+
+      const habitadAnimal = document.createElement("p")
+      habitadAnimal.id = "habitadAnimal"
+      habitadAnimal.textContent= "Habitad: Bosques"
+
+      const contVideo = document.createElement("div")
+      contVideo.id = "contVideo"
+
+      const videoAnimal = '<iframe width="400" height="300" src="https://www.youtube.com/embed/8R9jzEGVSM4?si=wcb9fcwKZ24gz3Bn" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>'
+
+
+
       const btnCerrar = this.getCloseButon(camera,labelRenderer,controls);
 
       const iconoAnimal = document.createElement('img')
@@ -101,7 +126,7 @@ class Zorro {
 
       const p = document.createElement('p')
       p.id = "infoAnimal"
-      p.textContent = `El zorro es un animal muy inteligente y astuto, que pertenece a la familia de los cánidos, como los perros y los lobos. Hay muchos tipos de zorros, que se diferencian por su color, tamaño y hábitat. Algunos ejemplos son el zorro rojo, el zorro ártico, el zorro fénec y el zorro gris. Los zorros son omnívoros, es decir, que comen tanto plantas como animales. Su dieta puede incluir frutas, semillas, insectos, roedores, aves y huevos. Los zorros son animales nocturnos, que salen a cazar y explorar por la noche. Durante el día, duermen en sus madrigueras, que pueden ser cuevas, troncos o agujeros en el suelo. Los zorros son muy ágiles y veloces, y pueden correr hasta 60 km/h. También tienen un buen sentido del olfato, la vista y el oído, que les ayudan a encontrar su comida y a evitar a sus enemigos.Sin embargo, también pueden ser peligrosos si se sienten amenazados o si tienen rabia. Por eso, hay que respetarlos y protegerlos.`
+      p.textContent = `El zorro es un animal muy inteligente y astuto, como los perros y los lobos. Hay muchos tipos de zorros, que se diferencian por su color, tamaño y hábitat. Los zorros son animales nocturnos, que salen a cazar y explorar por la noche. Por eso, hay que respetarlos y protegerlos.`
 
       const nombreAnimal = document.createElement('h1')
       nombreAnimal.id = "nombreAnimal"
@@ -124,7 +149,19 @@ class Zorro {
       divInfo.appendChild(cont2)
       divInfo.appendChild(cont3)
 
-      return new CSS2DObject(divInfo)
+      infGeneral.appendChild(pesoAnimal)
+      infGeneral.appendChild(alimentacion)
+      infGeneral.appendChild(habitadAnimal)
+
+      contVideo.insertAdjacentHTML("afterbegin",videoAnimal)
+
+      gridCont.appendChild(divInfo)
+      gridCont.appendChild(infGeneral)
+      gridCont.appendChild(contVideo)
+
+      gridCont.style.pointerEvents = "stroke"
+
+      return new CSS2DObject(gridCont)
     }
 
     this.getCloseButon = (camera,labelRenderer,controls)=> {

@@ -104,6 +104,29 @@ class Oso {
       const cont3 = document.createElement("div")
       cont3.id = "cont3"
 
+      const gridCont = document.createElement("div")
+      gridCont.id = "gridCont"
+
+      const infGeneral = document.createElement("div")
+      infGeneral.id = "infGeneral"
+
+      const pesoAnimal = document.createElement("p")
+      pesoAnimal.id = "pesoAnimal"
+      pesoAnimal.textContent="Peso promedio: +350Kg "
+
+      const alimentacion = document.createElement("p")
+      alimentacion.id = "alimentacion"
+      alimentacion.textContent="Alimentacion: Carnivoros"
+
+      const habitadAnimal = document.createElement("p")
+      habitadAnimal.id = "habitadAnimal"
+      habitadAnimal.textContent= "Habitad: Bosques"
+
+      const contVideo = document.createElement("div")
+      contVideo.id = "contVideo"
+
+      const videoAnimal = '<iframe width="400" height="300" src="https://www.youtube.com/embed/IgVB1tJe1XI?si=xn-LCi-zqtgMrPsY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>'
+      
       const btnCerrar = this.getCloseButon(camera,labelRenderer,controls);
 
       const iconoAnimal = document.createElement('img')
@@ -112,7 +135,7 @@ class Oso {
 
       const p = document.createElement('p')
       p.id = "infoAnimal"
-      p.textContent = `Los osos son animales grandes y fuertes que viven en diferentes partes del mundo. Hay ocho tipos de osos, y cada uno tiene un color y un hábitat diferente. Algunos osos son blancos y viven en el hielo, como el oso polar. Los osos son mamíferos, lo que significa que toman leche de su mamá cuando son bebés. Los osos tienen un buen olfato y una buena vista, pero sus oídos son pequeños. Los osos pueden correr muy rápido cuando quieren, pero también son tranquilos y solitarios. Algunos osos duermen durante el invierno para ahorrar energía, y se llaman hibernar. Los osos son animales muy interesantes y curiosos, pero también pueden ser peligrosos si se sienten amenazados. Por eso, hay que respetarlos y cuidarlos.`
+      p.textContent = `Los osos son animales grandes y fuertes que viven en diferentes partes del mundo. Hay ocho tipos de osos, y cada uno tiene un color y un hábitat diferente. Algunos osos son blancos y viven en el hielo, como el oso polar. Los osos tienen un buen olfato y una buena vista, pero sus oídos son pequeños. Por eso, hay que respetarlos y cuidarlos.`
 
       const nombreAnimal = document.createElement('h1')
       nombreAnimal.id = "nombreAnimal"
@@ -135,7 +158,19 @@ class Oso {
       divInfo.appendChild(cont2)
       divInfo.appendChild(cont3)
 
-      return new CSS2DObject(divInfo)
+      infGeneral.appendChild(pesoAnimal)
+      infGeneral.appendChild(alimentacion)
+      infGeneral.appendChild(habitadAnimal)
+
+      contVideo.insertAdjacentHTML("afterbegin",videoAnimal)
+
+      gridCont.appendChild(divInfo)
+      gridCont.appendChild(infGeneral)
+      gridCont.appendChild(contVideo)
+
+      gridCont.style.pointerEvents = "stroke"
+
+      return new CSS2DObject(gridCont)
     }
 
     this.getCloseButon = (camera,labelRenderer,controls)=> {

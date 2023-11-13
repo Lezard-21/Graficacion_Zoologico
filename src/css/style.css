@@ -21,6 +21,7 @@ canvas{
   justify-content: center;
   align-items: center;
 }
+
 #progress-bar{
   width: 30%;
   margin-top: 0.5%;
@@ -30,6 +31,79 @@ canvas{
 label{
   color: white;
   font-size: 2rem;
+}
+
+#gridCont {  
+  display: grid;
+  display: grid; 
+  
+
+  grid-template-rows: 1fr 1fr;
+  grid-template-columns: 1fr 1fr;
+  
+  gap: 0px;
+  height: 100%;
+  
+  padding-top: 30px;
+  padding-left: 450px;
+}
+
+#infGeneral { 
+  grid-row-start: 1;
+  grid-column-start: 1;
+
+  grid-row-end: 2;
+  grid-column-end: 2; 
+
+  
+  height: 300px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 25px;
+  color: white;
+  border-radius: 16px;
+  background-color: #67BAA6;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  padding: 10px;
+  margin-left: 100px;
+  padding-left: 30px;
+  padding-right: 30px;
+  margin-right: 20px;
+}
+
+#pesoAnimal {
+  background-color: #FFC049;
+  border-radius: 10px;
+  border: 10px solid #FFC049;
+}
+
+#alimentacion {
+  background-color: #FF7E58;
+  border-radius: 10px;
+  border: 10px solid #FF7E58;
+}
+
+#habitadAnimal {
+  background-color: #008B70;
+  border-radius: 10px;
+  border: 10px solid #008B70;
+}
+
+#contVideo { 
+  background-color: #ffffff; 
+  grid-row-start: 2;
+  grid-column-start: 1;
+
+  grid-row-end: 3;
+  grid-column-end: 2;
+
+  height: 300px;
+  width: 400px;
+  padding: 10px;
+  margin-right: 20px;
+  border-radius: 10px;
+  margin-top: -20px;
+  margin-left: 100px;
 }
 
 #divInfo{
@@ -44,9 +118,15 @@ label{
   background-size: 100% 100%;
   background-repeat: no-repeat;
   border-radius: 16px;
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0,10);
   border: 1px solid rgba(255, 255, 255, 0.3);
   padding: 30px;
+
+  grid-row-start: 1;
+  grid-column-start: 2;
+
+  grid-row-end: 3;
+  grid-column-end: 3;
 }
 
 #cont1{
@@ -89,12 +169,15 @@ label{
 
 #infoAnimal{
   width: auto;
-  height: auto;
+  height: 200px;
+  overflow: auto;
   border-radius: 10px;
   color: rgb(255, 255, 255);
   text-align: justify;
   font-size: large;
-  backdrop-filter: blur(3px);
+  background-color: rgba(128, 128, 128, 0.7) ;
+  padding: 15px;
+  
   box-shadow: 0px 10px 50px black;
   margin-top: 0px;
 }

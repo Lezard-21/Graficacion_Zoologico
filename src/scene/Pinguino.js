@@ -94,6 +94,30 @@ class Pinguino {
       const cont3 = document.createElement("div")
       cont3.id = "cont3"
 
+      const gridCont = document.createElement("div")
+      gridCont.id = "gridCont"
+
+      const infGeneral = document.createElement("div")
+      infGeneral.id = "infGeneral"
+
+      const pesoAnimal = document.createElement("p")
+      pesoAnimal.id = "pesoAnimal"
+      pesoAnimal.textContent="Peso promedio: 2 - 40Kg "
+
+      const alimentacion = document.createElement("p")
+      alimentacion.id = "alimentacion"
+      alimentacion.textContent="Alimentacion: Peces y mariscos"
+
+      const habitadAnimal = document.createElement("p")
+      habitadAnimal.id = "habitadAnimal"
+      habitadAnimal.textContent= "Habitad: Antártida"
+
+      const contVideo = document.createElement("div")
+      contVideo.id = "contVideo"
+
+      const videoAnimal = '<iframe width="400" height="300" src="https://www.youtube.com/embed/nt-edcQTmCE?si=wjSk7bsjxjszW4wd" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>'
+
+
       const btnCerrar = this.getCloseButon(camera,labelRenderer,controls);
 
       const iconoAnimal = document.createElement('img')
@@ -102,7 +126,7 @@ class Pinguino {
 
       const p = document.createElement('p')
       p.id = "infoAnimal"
-      p.textContent = `Los pingüinos son aves que no pueden volar, pero que son muy buenas nadadoras y buceadoras. Viven en el hemisferio sur del planeta, y algunos de ellos soportan temperaturas muy frías. Hay muchos tipos de pingüinos, y cada uno tiene su propio color, tamaño y forma. Los pingüinos son animales muy interesantes y divertidos, que nos enseñan el valor de la adaptación, la cooperación y la fidelidad. `
+      p.textContent = `Los pingüinos son aves que no pueden volar, pero que son muy buenas nadadoras y buceadoras. Hay muchos tipos de pingüinos, y cada uno tiene su propio color, tamaño y forma. Los pingüinos son animales muy interesantes y divertidos, que nos enseñan el valor de la adaptación, la cooperación y la fidelidad. `
 
       const nombreAnimal = document.createElement('h1')
       nombreAnimal.id = "nombreAnimal"
@@ -125,7 +149,19 @@ class Pinguino {
       divInfo.appendChild(cont2)
       divInfo.appendChild(cont3)
 
-      return new CSS2DObject(divInfo)
+      infGeneral.appendChild(pesoAnimal)
+      infGeneral.appendChild(alimentacion)
+      infGeneral.appendChild(habitadAnimal)
+
+      contVideo.insertAdjacentHTML("afterbegin",videoAnimal)
+
+      gridCont.appendChild(divInfo)
+      gridCont.appendChild(infGeneral)
+      gridCont.appendChild(contVideo)
+
+      gridCont.style.pointerEvents = "stroke"
+
+      return new CSS2DObject(gridCont)
     }
 
     this.getCloseButon = (camera,labelRenderer,controls)=> {
