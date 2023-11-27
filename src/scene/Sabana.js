@@ -4,7 +4,7 @@ import * as THREE from 'three';
 class Sabana {
   constructor(scene, LoadingManager, x, y, z) {
     const loader = new GLTFLoader(LoadingManager);
-    let mixer;
+    this.lookAt = lookAt;
     let model;
     // let nodes = new Map();
     // let cont = 0;
@@ -13,15 +13,16 @@ class Sabana {
       model.scale.set(0.3, 0.3, 0.3);
       scene.add(model);
       model.position.set(x, y, z)
-
     }, undefined, function (error) {
       console.error(error);
     });
-
-    this.update = (delta) => {
-      //if (mixer) mixer.update(delta);
+    function lookAt(v){
+      if (model) {
+        const vector = new THREE.Vector3().copy(v);
+        vector.setY(y);
+        model.lookAt(vector);
+      }
     }
-
     this.getModel = () => {
       return model;
     }

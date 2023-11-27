@@ -11,6 +11,7 @@ class Pinguino {
     let model;
     let nodes = new Map();
     let cont = 0;
+    this.lookAt = lookAt;
     model = loader.load('models/pingu.glb', function (gltf) {
       model = gltf.scene;
       scene.add(model);
@@ -38,6 +39,11 @@ class Pinguino {
     }, undefined, function (error) {
       console.error(error);
     });
+    function lookAt(v){
+      if (model) {
+        model.lookAt(v);
+      }
+    }
 
     this.update = (delta) => {
       if (mixer) mixer.update(delta);

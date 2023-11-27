@@ -10,6 +10,7 @@ class Leon {
     let model;
     let nodes = new Map();
     let cont = 0;
+    this.lookAt = lookAt;
     model = loader.load('models/leon.glb', function (gltf) {
       model = gltf.scene;
       model.rotateY(110);
@@ -38,7 +39,12 @@ class Leon {
     }, undefined, function (error) {
       console.error(error);
     });
-
+    function lookAt(v){
+      if (model) {
+        model.lookAt(v);
+        model.rotateY(110);
+      }
+    }
     this.update = (delta) => {
       if (mixer) mixer.update(delta);
     }

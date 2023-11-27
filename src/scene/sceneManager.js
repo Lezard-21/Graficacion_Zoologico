@@ -10,11 +10,18 @@ import Tundra from './Tundra';
 import Bosque from './Bosque';
 import Zorro from './Zorro';
 import Oso from './Oso';
+import gsap from 'gsap'
 
 export default class SceneManager {
     constructor(canvas) {
 
         const clock = new THREE.Clock();
+
+        let ModelsCoords = [[],[]];
+        ModelsCoords = setCoords(5,100);
+        let cameraCoords = [[],[]];
+        cameraCoords = setCoords(5,130);
+        let keyCont = 0; 
 
         const scene = buildScene();
         const renderer = buildRender();
@@ -37,10 +44,11 @@ export default class SceneManager {
         renderer.render(scene,camera);
 
         this.sceneSubjects = createSceneSubjects(scene,LoadingManager);
-        //variable de prueba 
-        let angle = 0; 
-        setListeners(this.sceneSubjects);
+        this.sceneHabitads = createSceneHabitats(scene,LoadingManager);
 
+        //variable de prueba 
+        setSubjectsListeners(this.sceneSubjects);
+        setKeysListeners();
         //helpers
         const gridHelper = new THREE.GridHelper(200, 50)
         scene.add(gridHelper)
@@ -62,7 +70,7 @@ export default class SceneManager {
 
         function buildCamera() {
             const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-            camera.position.set(0, 20, 30);
+            camera.position.set(0, 10, 30);
             return camera;
         }
 
@@ -76,7 +84,7 @@ export default class SceneManager {
             scene.add(lightHelper, positionLinght, ambientLight);
         }
 
-        function setListeners(sceneSubjets) {
+        function setSubjectsListeners(sceneSubjets) {
             const mousePosition = new THREE.Vector2()
             const rayCaster = new THREE.Raycaster()
             renderer.domElement.addEventListener('dblclick', (e) => {
@@ -103,19 +111,24 @@ export default class SceneManager {
                                 }
                             }
                         });
-                        console.log(intersects.length)
                     }
                 });
             });
+        }
 
+        function setKeysListeners() {
             window.addEventListener('keyup', (e) => {
                 console.log(camera.position)
                 console.log(camera.rotation)
-                camera.position.x = 30 * Math.cos(angle);
-                camera.position.z = 30 * Math.sin(angle);
-                angle += 0.5;
+                if (keyCont<=4) {
+                    camera.position.x = cameraCoords[0][keyCont];
+                    camera.position.z = cameraCoords[1][keyCont]; 
+                    camera.lookAt(ModelsCoords[0][keyCont],0,ModelsCoords[1][keyCont])  
+                    keyCont++;
+                }else{
+                    keyCont = 0;
+                }
             });
-            
         }
 
         function setProgressBar(){
@@ -139,35 +152,70 @@ export default class SceneManager {
 
             LoadingManager.onLoad = () => {
                 progressBarContainer.style.display = 'none';
+                const tl = gsap.timeline();
+                tl.to(camera.position, {
+                    x: cameraCoords[0][keyCont],
+                    y: 10,
+                    z: cameraCoords[1][keyCont],
+                    duration: 3,
+                    onUpdate: () => {
+                        camera.lookAt(ModelsCoords[0][keyCont],0,ModelsCoords[1][keyCont]);
+                    }
+                })
             }
             return LoadingManager;
+        }
+
+        function setCoords(numObjects,radius){
+            // const numObjects = 5; //numero de objetos
+            // const radius = 100;  //distancia respecto al centro
+            const angleStep = 2 * Math.PI / numObjects;  // dividir el círculo completo (2 * PI radianes) en x partes
+            let coords = [[],[]];  
+            for (let i = 0; i < numObjects; i++) {
+                let angle = i * angleStep;
+                let x = radius * Math.cos(angle);
+                let z = radius * Math.sin(angle);
+                coords[0][i] = x;
+                coords[1][i] = z;
+            }
+            return coords;
         }
 
         function createSceneSubjects(scene, LoadingManager) {
             const sceneSubjects = [
                 //aqui solo se crean mas entidades para agregarlas a la esena 10,0,-10
-                new Mono(scene,LoadingManager,16,0,-14),
-                new Pinguino(scene,LoadingManager,-13,5,-20),
-                new Leon(scene,LoadingManager,10,0,10),
-                new Zorro(scene,LoadingManager,-20,2,40),
-                new Oso(scene,LoadingManager,-17,0,10),
-                /**dolores vargas*/
-                new Bosque(scene, LoadingManager,-28,-9,8),
-                new Bosque(scene, LoadingManager,-28,-9,38),
-                new Tundra(scene, LoadingManager,-5,2.3,-25),
-                new Sabana(scene, LoadingManager,20,-1,-25),
-                new Sabana(scene, LoadingManager,20,-1,15),
+                new Mono(scene,LoadingManager,ModelsCoords[0][0],0,ModelsCoords[1][0]),
+                new Pinguino(scene,LoadingManager,ModelsCoords[0][1],5,ModelsCoords[1][1]),
+                new Leon(scene,LoadingManager,ModelsCoords[0][2],0,ModelsCoords[1][2]),
+                new Zorro(scene,LoadingManager,ModelsCoords[0][3],2,ModelsCoords[1][3]),
+                new Oso(scene,LoadingManager,ModelsCoords[0][4],0,ModelsCoords[1][4]),
                 // //new SceneSubject(scene)
             ];
             return sceneSubjects;
         }
+        function createSceneHabitats(scene, LoadingManager) {
+            const habitads = [
+                /**dolores vargas*/
+                new Sabana(scene, LoadingManager,ModelsCoords[0][0],-1,ModelsCoords[1][0]),
+                new Tundra(scene, LoadingManager,ModelsCoords[0][1],2.3,ModelsCoords[1][1]),
+                new Sabana(scene, LoadingManager,ModelsCoords[0][2],-1,ModelsCoords[1][2]),
+                new Bosque(scene, LoadingManager,ModelsCoords[0][3],-9,ModelsCoords[1][3]),
+                new Bosque(scene, LoadingManager,ModelsCoords[0][4],-9,ModelsCoords[1][4])
+            ]
+            return habitads;
+        }
 
         this.update = ()=> {
             const elapsedTime = clock.getDelta();
-            for (let i = 0; i < this.sceneSubjects.length; i++)
+            for (let i = 0; i < this.sceneSubjects.length; i++){
                  this.sceneSubjects[i].update(elapsedTime);
+                 this.sceneSubjects[i].lookAt(camera.position)
+                }
+            for (let i = 0; i < this.sceneSubjects.length; i++){
+                 this.sceneHabitads[i].lookAt(camera.position)
+                }
             this.controls.update()
-            labelRenderer.render(scene,camera)
+            labelRenderer.render(scene,camera);
             renderer.render(scene, camera);
         };
 

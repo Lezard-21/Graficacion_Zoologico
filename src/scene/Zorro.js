@@ -10,6 +10,7 @@ class Zorro {
     let model;
     let nodes = new Map();
     let cont = 0;
+    this.lookAt = lookAt;
     model = loader.load('models/zorro2.glb', function (gltf) {
       model = gltf.scene;
       scene.add(model);
@@ -37,6 +38,11 @@ class Zorro {
     }, undefined, function (error) {
       console.error(error);
     });
+    function lookAt(v){
+      if (model) {
+        model.lookAt(v);
+      }
+    }
 
     this.update = (delta) => {
       if (mixer) mixer.update(delta);
