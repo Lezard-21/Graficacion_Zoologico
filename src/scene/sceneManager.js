@@ -56,6 +56,7 @@ export default class SceneManager {
         function buildScene() {
             const scene = new THREE.Scene();
             scene.background = new THREE.TextureLoader().load('img/butter dog.jpg');
+            scene.fog = new THREE.Fog( 0xcccccc, 50, 70 );
             return scene;
         }
 
@@ -188,9 +189,15 @@ export default class SceneManager {
                 new Pinguino(scene,LoadingManager,ModelsCoords[0][1],5,ModelsCoords[1][1]),
                 new Leon(scene,LoadingManager,ModelsCoords[0][2],0,ModelsCoords[1][2]),
                 new Zorro(scene,LoadingManager,ModelsCoords[0][3],2,ModelsCoords[1][3]),
-                new Oso(scene,LoadingManager,ModelsCoords[0][4],0,ModelsCoords[1][4]),
+                new Oso(scene,LoadingManager,ModelsCoords[0][4],1,ModelsCoords[1][4]),
                 // //new SceneSubject(scene)
             ];
+            const planeGeometry = new THREE.PlaneGeometry(300,300);
+            const planeMaterial = new THREE.MeshStandardMaterial({color:0x1a98c9, side:THREE.DoubleSide})
+            const plane = new THREE.Mesh(planeGeometry,planeMaterial)
+            plane.rotation.x = -0.5 * Math.PI
+            plane.setY = 5
+            scene.add(plane)
             return sceneSubjects;
         }
         function createSceneHabitats(scene, LoadingManager) {
@@ -199,8 +206,8 @@ export default class SceneManager {
                 new Sabana(scene, LoadingManager,ModelsCoords[0][0],-1,ModelsCoords[1][0]),
                 new Tundra(scene, LoadingManager,ModelsCoords[0][1],2.3,ModelsCoords[1][1]),
                 new Sabana(scene, LoadingManager,ModelsCoords[0][2],-1,ModelsCoords[1][2]),
-                new Bosque(scene, LoadingManager,ModelsCoords[0][3],-9,ModelsCoords[1][3]),
-                new Bosque(scene, LoadingManager,ModelsCoords[0][4],-9,ModelsCoords[1][4])
+                new Bosque(scene, LoadingManager,ModelsCoords[0][3],-8,ModelsCoords[1][3]),
+                new Bosque(scene, LoadingManager,ModelsCoords[0][4],-8,ModelsCoords[1][4])
             ]
             return habitads;
         }
