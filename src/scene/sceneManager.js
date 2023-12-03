@@ -22,6 +22,16 @@ export default class SceneManager {
         let cameraCoords = [[],[]];
         cameraCoords = setCoords(5,130);
         let keyCont = 0; 
+        let animationCoords = [[],[]];
+        animationCoords = setCoords(5,115)
+
+        const ModelsCoordsY = [[],[]]
+        ModelsCoordsY[0][0] = 0;
+        ModelsCoordsY[0][1] = 5;
+        ModelsCoordsY[0][2] = 0;
+        ModelsCoordsY[0][3] = 2;
+        ModelsCoordsY[0][4] = 1.7;
+
 
         const scene = buildScene();
         const renderer = buildRender();
@@ -50,13 +60,14 @@ export default class SceneManager {
         setSubjectsListeners(this.sceneSubjects);
         setKeysListeners();
         //helpers
-        const gridHelper = new THREE.GridHelper(200, 50)
-        scene.add(gridHelper)
+        // const gridHelper = new THREE.GridHelper(200, 50)
+        // scene.add(gridHelper)
 
         function buildScene() {
             const scene = new THREE.Scene();
             scene.background = new THREE.TextureLoader().load('img/butter dog.jpg');
-            scene.fog = new THREE.Fog( 0xcccccc, 50, 70 );
+            // scene.fog = new THREE.FogExp2( 0xcccccc,.019 );
+            scene.fog = new THREE.Fog( 0xcff1fa, 50, 70 );
             return scene;
         }
 
@@ -80,9 +91,9 @@ export default class SceneManager {
             positionLinght.position.set(0, 50, 0)
             const ambientLight = new THREE.AmbientLight(0xffffff)
 
-            //helper
-            const lightHelper = new THREE.PointLightHelper(positionLinght)
-            scene.add(lightHelper, positionLinght, ambientLight);
+            // //helper
+            // const lightHelper = new THREE.PointLightHelper(positionLinght)
+            scene.add(positionLinght, ambientLight);
         }
 
         function setSubjectsListeners(sceneSubjets) {
@@ -107,6 +118,15 @@ export default class SceneManager {
                                 if (!intersection) {
                                     document.body.appendChild(labelRenderer.domElement)
                                     e.setCard(scene,camera,conts,labelRenderer);
+
+                                    const tl = gsap.timeline();
+                                    tl.to(camera.position, {
+                                        x: animationCoords[0][keyCont-1],
+                                        y: ModelsCoordsY[0][keyCont-1]+4,
+                                        z: animationCoords[1][keyCont-1],
+                                        duration: 2
+                                    })  
+                                    camera.lookAt(ModelsCoords[0][keyCont],0,ModelsCoords[1][keyCont])
                                     e.setIntersected()
                                     intersection = true;
                                 }
@@ -119,12 +139,16 @@ export default class SceneManager {
 
         function setKeysListeners() {
             window.addEventListener('keyup', (e) => {
-                console.log(camera.position)
-                console.log(camera.rotation)
                 if (keyCont<=4) {
-                    camera.position.x = cameraCoords[0][keyCont];
-                    camera.position.z = cameraCoords[1][keyCont]; 
-                    camera.lookAt(ModelsCoords[0][keyCont],0,ModelsCoords[1][keyCont])  
+                    console.log("keycont: r"+keyCont)
+                    const tl = gsap.timeline();
+                    tl.to(camera.position, {
+                        x: cameraCoords[0][keyCont],
+                        y: 10,
+                        z: cameraCoords[1][keyCont],
+                        duration: 2
+                    })  
+                    camera.lookAt(ModelsCoords[0][keyCont],0,ModelsCoords[1][keyCont])
                     keyCont++;
                 }else{
                     keyCont = 0;
@@ -163,6 +187,7 @@ export default class SceneManager {
                         camera.lookAt(ModelsCoords[0][keyCont],0,ModelsCoords[1][keyCont]);
                     }
                 })
+                keyCont++;
             }
             return LoadingManager;
         }
@@ -185,14 +210,14 @@ export default class SceneManager {
         function createSceneSubjects(scene, LoadingManager) {
             const sceneSubjects = [
                 //aqui solo se crean mas entidades para agregarlas a la esena 10,0,-10
-                new Mono(scene,LoadingManager,ModelsCoords[0][0],0,ModelsCoords[1][0]),
-                new Pinguino(scene,LoadingManager,ModelsCoords[0][1],5,ModelsCoords[1][1]),
-                new Leon(scene,LoadingManager,ModelsCoords[0][2],0,ModelsCoords[1][2]),
-                new Zorro(scene,LoadingManager,ModelsCoords[0][3],2,ModelsCoords[1][3]),
-                new Oso(scene,LoadingManager,ModelsCoords[0][4],1,ModelsCoords[1][4]),
+                new Mono(scene,LoadingManager,ModelsCoords[0][0],ModelsCoordsY[0][0],ModelsCoords[1][0]),
+                new Pinguino(scene,LoadingManager,ModelsCoords[0][1],ModelsCoordsY[0][1],ModelsCoords[1][1]),
+                new Leon(scene,LoadingManager,ModelsCoords[0][2],ModelsCoordsY[0][2],ModelsCoords[1][2]),
+                new Zorro(scene,LoadingManager,ModelsCoords[0][3],ModelsCoordsY[0][3],ModelsCoords[1][3]),
+                new Oso(scene,LoadingManager,ModelsCoords[0][4],ModelsCoordsY[0][4],ModelsCoords[1][4]),
                 // //new SceneSubject(scene)
             ];
-            const planeGeometry = new THREE.PlaneGeometry(300,300);
+            const planeGeometry = new THREE.PlaneGeometry(500,500);
             const planeMaterial = new THREE.MeshStandardMaterial({color:0x1a98c9, side:THREE.DoubleSide})
             const plane = new THREE.Mesh(planeGeometry,planeMaterial)
             plane.rotation.x = -0.5 * Math.PI
@@ -207,7 +232,7 @@ export default class SceneManager {
                 new Tundra(scene, LoadingManager,ModelsCoords[0][1],2.3,ModelsCoords[1][1]),
                 new Sabana(scene, LoadingManager,ModelsCoords[0][2],-1,ModelsCoords[1][2]),
                 new Bosque(scene, LoadingManager,ModelsCoords[0][3],-8,ModelsCoords[1][3]),
-                new Bosque(scene, LoadingManager,ModelsCoords[0][4],-8,ModelsCoords[1][4])
+                new Bosque(scene, LoadingManager,ModelsCoords[0][4]-10,-8,ModelsCoords[1][4])
             ]
             return habitads;
         }

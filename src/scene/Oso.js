@@ -13,7 +13,7 @@ class Oso {
     this.lookAt = lookAt;
     model = loader.load('models/oso.glb', function (gltf) {
       model = gltf.scene;
-      model.scale.set(0.2, 0.2, 0.2);
+      model.scale.set(0.1, 0.1, 0.1);
       model.rotateY(55);
       scene.add(model);
       model.position.set(x, y, z)
@@ -40,9 +40,12 @@ class Oso {
     }, undefined, function (error) {
       console.error(error);
     });
+    
     function lookAt(v){
       if (model) {
-        model.lookAt(v);
+        const vector = new THREE.Vector3().copy(v);
+        vector.setY(y);
+        model.lookAt(vector);
         model.rotateY(55);
       }
     }
@@ -69,26 +72,26 @@ class Oso {
 
     this.setCard = (scene, camera, controls,labelRenderer,intersection) => {
       this.scene = scene;
-      const tl = gsap.timeline();
-      //0,20,30
-      tl.to(camera.position, {
-        x: -5,
-        y: 10,
-        z: 20,
-        duration: 2,
-        onUpdate: () => {
-          camera.lookAt(1, 5, 0)
-        }
-      })
-      tl.to(camera.position, {
-        x: -9,
-        y: 3,
-        z: 15,
-        duration: 1.5,
-        onUpdate: () => {
-          camera.lookAt(-9, 3, 15)
-        }
-      }, 2);
+      // const tl = gsap.timeline();
+      // //0,20,30
+      // tl.to(camera.position, {
+      //   x: -5,
+      //   y: 10,
+      //   z: 20,
+      //   duration: 2,
+      //   onUpdate: () => {
+      //     camera.lookAt(1, 5, 0)
+      //   }
+      // })
+      // tl.to(camera.position, {
+      //   x: -9,
+      //   y: 3,
+      //   z: 15,
+      //   duration: 1.5,
+      //   onUpdate: () => {
+      //     camera.lookAt(-9, 3, 15)
+      //   }
+      // }, 2);
 
       controls.enabled = false
       if(!this.isIntersected() && !intersection){
@@ -180,20 +183,34 @@ class Oso {
       return new CSS2DObject(gridCont)
     }
 
+    function setCoords(numObjects,radius){
+      // const numObjects = 5; //numero de objetos
+      // const radius = 100;  //distancia respecto al centro
+      const angleStep = 2 * Math.PI / numObjects;  // dividir el círculo completo (2 * PI radianes) en x partes
+      let coords = [[],[]];  
+      for (let i = 0; i < numObjects; i++) {
+          let angle = i * angleStep;
+          let x = radius * Math.cos(angle);
+          let z = radius * Math.sin(angle);
+          coords[0][i] = x;
+          coords[1][i] = z;
+      }
+      return coords;
+  }
+
     this.getCloseButon = (camera,labelRenderer,controls)=> {
       const btnCerrar = document.createElement('button')
       btnCerrar.id = "btnCerrar"
       btnCerrar.style.pointerEvents = "stroke"
       btnCerrar.addEventListener('pointerdown', () => {
+        let ModelsCoords = [[],[]];
+        ModelsCoords = setCoords(5,130);
         const tl = gsap.timeline();
         tl.to(camera.position, {
-          x: 0,
-          y: 20,
-          z: 30,
+          x: ModelsCoords[0][4],
+          y: 10,
+          z: ModelsCoords[1][4],
           duration: 2,
-          onUpdate: () => {
-            camera.lookAt(1, 0, 0)
-          }
         })
         controls.enabled = true;
         this.scene.remove(this.cDiv)
