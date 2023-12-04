@@ -85,7 +85,7 @@ class Zorro {
         this.cDiv = this.getHtml(camera,labelRenderer,controls);
         scene.add(this.cDiv)
       }else{
-        const audio = new Audio('/audio/sonidoLeon.mp3');
+        const audio = new Audio('/audio/sonidoZorro.mp3');
         audio.play();
         scene.add(this.cDiv)
       }
@@ -93,7 +93,7 @@ class Zorro {
     }
 
     this.getHtml = (camera,labelRenderer,controls)=> {
-      const audio = new Audio('/audio/sonidoLeon.mp3');
+      const audio = new Audio('/audio/sonidoZorro.mp3');
       audio.play();
 
       const cont1 = document.createElement("div")
