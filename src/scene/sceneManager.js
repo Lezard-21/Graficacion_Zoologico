@@ -49,6 +49,7 @@ export default class SceneManager {
         
         this.controls = new MapControls(camera, renderer.domElement)
         const conts = this.controls;
+        this.controls.enabled = false;
 
         const LoadingManager = setProgressBar();
         renderer.render(scene,camera);

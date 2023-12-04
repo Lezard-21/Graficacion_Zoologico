@@ -87,6 +87,8 @@ class Pinguino {
         this.cDiv = this.getHtml(camera,labelRenderer,controls);
         this.scene.add(this.cDiv)
       }else{
+        const audio = new Audio('/audio/sonidoPinguino.mp3');
+        audio.play();
         this.scene.add(this.cDiv)
       }
       

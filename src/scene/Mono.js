@@ -70,32 +70,14 @@ class Mono {
     this.setCard = (scene, camera, controls,labelRenderer,intersection) => {
 
       this.scene = scene;
-      // const tl = gsap.timeline();
-      // //0,20,30
-      // tl.to(camera.position, {
-      //   x: -5,
-      //   y: 10,
-      //   z: 20,
-      //   duration: 2,
-      //   onUpdate: () => {
-      //     camera.lookAt(1, 5, 0)
-      //   }
-      // })
-      // tl.to(camera.position, {
-      //   x: -9,
-      //   y: 3,
-      //   z: 15,
-      //   duration: 1.5,
-      //   onUpdate: () => {
-      //     camera.lookAt(1, 5, 0)
-      //   }
-      // }, 2);
 
       controls.enabled = false
       if(!this.isIntersected() && !intersection){
         this.cDiv = this.getHtml(camera,labelRenderer,controls);
         scene.add(this.cDiv)
       }else{
+        const audio = new Audio('/audio/sonidoMono.mp3');
+        audio.play();
         scene.add(this.cDiv)
       }
       

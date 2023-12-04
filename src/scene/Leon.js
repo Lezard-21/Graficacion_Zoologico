@@ -86,6 +86,8 @@ class Leon {
         this.cDiv = this.getHtml(camera,labelRenderer,controls);
         scene.add(this.cDiv)
       }else{
+        const audio = new Audio('/audio/sonidoLeon.mp3');
+        audio.play();
         scene.add(this.cDiv)
       }
       
